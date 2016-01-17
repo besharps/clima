@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Clima App</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	
+</head>
+<body>
+
+	<h1>App Clima v0.1</h1>
+
+	<br>
+	<p id="Longitud"></p>
+	<p id="Latitud"></p>
+
+
+
+<script type="text/javascript">
+	
+$(document).ready(function() {
+
+	var lon = "-34.6412903";
+	var lat = "-58.647524";
+
+	/* AJAX */
+	$.ajax({
+	  url: "https://api.forecast.io/forecast/18d55f569c782af0f78c9b4156afeb37/" + lon + "," + lat,
+	  dataType: "jsonp",
+	  success: function (data) {
+	  	r = JSON.parse(data);
+	    $("#Longitud").html("Longitud: " + r.longitude);
+	    $("#Latitud").html("Latitud: " + r.latitude);
+	    //alert(data.longitude);
+	  }
+	});
+
+});
+</script>
+
+</body>
+</html>
