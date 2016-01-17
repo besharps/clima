@@ -24,15 +24,18 @@ $(document).ready(function() {
 
 	var lon = "-34.6412903";
 	var lat = "-58.647524";
+	var config = "?si&lang=es";
 
 	/* AJAX */
 	$.ajax({
 	  url: "https://api.forecast.io/forecast/18d55f569c782af0f78c9b4156afeb37/" + lon + "," + lat,
 	  dataType: "jsonp",
 	  success: function (data) {
-	  	r = JSON.parse(data);
-	    $("#Longitud").html("Longitud: " + r.longitude);
-	    $("#Latitud").html("Latitud: " + r.latitude);
+	  	//r = JSON.parse(data);
+	  	r = $.parseJSON(data)
+	  	alert(r.count);
+	    //$("#Longitud").html("Longitud: " + r.['longitude']);
+	    //$("#Latitud").html("Latitud: " + r.['latitude']);
 	    //alert(data.longitude);
 	  }
 	});
