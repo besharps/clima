@@ -96,11 +96,7 @@ function geocodeResult(results, status) {
 function mostrarClima(latitud,longitud){
 
 
-
-
-    //alert("Dentro de muestra clima!!"); Entra!!!!
-
-    var config = "?units=si&lang=es"; //units=si o units=ca????
+    var config = "?units=si&lang=es"; 
 
     var url="https://api.forecast.io/forecast/18d55f569c782af0f78c9b4156afeb37/" + latitud + "," + longitud + config;
 
@@ -115,7 +111,7 @@ function mostrarClima(latitud,longitud){
         $("#currently-temperature").html("Temperatura: " + clima.currently.temperature + " ºC");
         $("#currently-apparentTemperature").html("Sensación Térmica: " + clima.currently.apparentTemperature + " ºC");
         $("#currently-windSpeed").html("Velocidad del Viento: " + clima.currently.windSpeed + " km/h");
-        $("#currently-windBearing").html("Orientación del Viento: " + clima.currently.windBearing + "º :: " + orientacion((parseInt(clima.currently.windBearing))));
+        $("#currently-windBearing").html("Orientación del Viento: " + clima.currently.windBearing + "º :: " + orientacion(clima.currently.windBearing));
         $("#currently-humidity").html("Humedad: " + clima.currently.humidity*100 +"%");
         $("#currently-dewPoint").html("Punto de Rocio: " + clima.currently.dewPoint + " ºC");
         $("#currently-pressure").html("Presión: " + clima.currently.pressure + " hPa");
@@ -130,24 +126,74 @@ function mostrarClima(latitud,longitud){
     });
 
     function orientacion(grados){
-            alert(grados);
-            switch (grados){
-                case grados>0 && grados<=90:
-                    return "NorEste";
-                break;
-                case grados>90 && grados<180:
-                    return "SudEste";
-                break;
-                case (grados>180 && grados<=270):
-                    return "SudOeste";
-                break;                
-                case (grados>270 && grados<=360):
-                    return "NorOeste";
-                break;
-                default:
-                    return "Error de Coordenadas!";
-            }
-}
+
+
+        if((grados==0 && grados<=11)|| grados==360)
+            respuesta="N (Norte)";
+
+        if(grados>11 && grados<=22)
+            respuesta="NpE (Norte por Este)";
+
+        if(grados>22 && grados<34)
+            respuesta="NNE (Nornoroeste)";
+
+        if(grados>=34 && grados<45)
+            respuesta="NEpN (Noreste por Norte)";
+
+        if(grados>=45 && grados<=56)
+            respuesta="NE (Noreste)";
+        
+        if(grados>56 && grados<=67)
+            respuesta="NEpE (Noreste por Este)";
+
+        if(grados>67 && grados<79)
+            respuesta="ENE (Estenoreste)";
+                        
+        if(grados>=79 && grados<90)
+            respuesta="EpN (Este por Norte)";
+                            
+        if(grados>=90 && grados<=101)
+            respuesta="E (Este)";
+
+        if(grados>101 && grados<=112)
+            respuesta="EpS (Este por sur)";
+
+        if(grados>112 && grados<124)
+            respuesta="ESE (Estesureste)";
+
+        if(grados>=124 && grados<135)
+            respuesta="SEpE (Sureste por Este)";
+
+        if(grados>=135 && grados<=146)
+            respuesta="SE (Sureste)";
+
+        if(grados>146 && grados<=157)
+            respuesta="SEpS (Sureste por Sur)";
+
+        if(grados>157 && grados<169)
+            respuesta="SSE (Sursurste)";
+
+        if(grados>=169 && grados<180)
+            respuesta="SpE (Sur por Este)";
+
+        if(grados>=180 && grados<=191)
+            respuesta="S (Sur)";
+
+        if(grados>=169 && grados<180)
+            respuesta="SpO (Sur por Oeste)";
+
+        if(grados>=169 && grados<180)
+            respuesta="SpE (Sur por Este)";
+
+        if(grados>=169 && grados<180)
+            respuesta="SpE (Sur por Este)";
+        
+        if(grados<0 || grados>360)
+            respuesta="Error de Coordenadas!";
+
+        return respuesta;    
+    }
+
 }
 
 
