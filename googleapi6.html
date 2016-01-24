@@ -5,7 +5,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Google Api</title>
+<title>B# clima</title>
 
 <!-- API que devuelve latitud y longitus de una ubicación-->
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>	
@@ -35,7 +35,7 @@
 
 <br/>
 
-<div id='map_canvas' style="width:300px; height:200px;"></div>
+<div id='map_canvas' style="width:600px; height:400px;"></div>
 
 <br/>
 <br/>
@@ -76,14 +76,12 @@
 
 $('#search').click( function() {
 
-    // Obtenemos la dirección y la asignamos a una variable
+    // Guardamos la dirección 
     var address = $('#address').val();
     
-    // Creamos el Objeto Geocoder
     var geocoder = new google.maps.Geocoder();
     
-    // Hacemos la petición indicando la dirección e invocamos la función
-    // geocodeResult enviando todo el resultado obtenido
+    // Hacemos la petición indicando la dirección e invocamos la función geocodeResult
     geocoder.geocode({ 'address': address}, geocodeResult);
 });
 </script>
