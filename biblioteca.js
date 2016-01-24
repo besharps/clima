@@ -108,13 +108,13 @@ function mostrarClima(latitud,longitud){
         data = JSON.stringify(datoOrigen);
         clima = JSON.parse(data); 
         $("#currently-summary").html("Descripción: " + clima.currently.summary);
-        $("#currently-temperature").html("Temperatura: " + clima.currently.temperature + " ºC");
-        $("#currently-apparentTemperature").html("Sensación Térmica: " + clima.currently.apparentTemperature + " ºC");
+        $("#currently-temperature").html("Temperatura: " + redondear(clima.currently.temperature) + " ºC");
+        $("#currently-apparentTemperature").html("Sensación Térmica: " + redondear(clima.currently.apparentTemperature) + " ºC");
         $("#currently-windSpeed").html("Velocidad del Viento: " + clima.currently.windSpeed + " km/h");
         $("#currently-windBearing").html("Orientación del Viento: " + orientacion(clima.currently.windBearing));
-        $("#currently-humidity").html("Humedad: " + clima.currently.humidity*100 +" %");
-        $("#currently-dewPoint").html("Punto de Rocio: " + clima.currently.dewPoint + " ºC");
-        $("#currently-pressure").html("Presión: " + clima.currently.pressure + " hPa");
+        $("#currently-humidity").html("Humedad: " + Math.round(clima.currently.humidity*100) +" %");
+        $("#currently-dewPoint").html("Punto de Rocio: " +redondear(clima.currently.dewPoint) + " ºC");
+        $("#currently-pressure").html("Presión: " + Math.round(clima.currently.pressure) + " hPa");
         
         //$("#currently-windSpeed").html("Velocidad del Viento: " + clima.currently.windSpeed);
        
@@ -124,6 +124,12 @@ function mostrarClima(latitud,longitud){
       }
       
     });
+
+
+    function redondear(numero){
+
+        return numero.toFixed(1);
+    }
 
     function orientacion(grados){
 
@@ -135,7 +141,7 @@ function mostrarClima(latitud,longitud){
             respuesta="NpE (Norte por Este)";
 
         if(grados>=17 && grados<=28)
-            respuesta="NNE (Nornoroeste)";
+            respuesta="NNE (Nornoreste)";
 
         if(grados>28 && grados<=39)
             respuesta="NEpN (Noreste por Norte)";
