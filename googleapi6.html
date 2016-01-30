@@ -5,7 +5,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Google Api</title>
+<title>B# clima</title>
 
 <!-- API que devuelve latitud y longitus de una ubicación-->
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>	
@@ -16,6 +16,16 @@
 <!-- Biblioteca de funciones-->
 <script src="biblioteca.js"></script>    
 <script src="eventos.js"></script>    
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 </head>
 
@@ -35,13 +45,13 @@
 
 <br/>
 
-<div id='map_canvas' style="width:300px; height:200px;"></div>
+<div id='map_canvas' style="width:600px; height:400px;"></div>
 
 <br/>
 <br/>
 
 <div id="actual">
-<h3> Pronostico Actual </h3>
+<h3> Estado del tiempo Actual </h3>
 <p id="currently-summary"></p>            
 <p id="currently-temperature"></p>        
 <p id="currently-apparentTemperature"></p>
@@ -68,6 +78,7 @@
 
 
 
+
 <footer> <center>  Desarrollado por - BeSharps -  B#  - </center> </footer>
 </body>
 
@@ -76,16 +87,25 @@
 
 $('#search').click( function() {
 
-    // Obtenemos la dirección y la asignamos a una variable
+    // Guardamos la dirección 
     var address = $('#address').val();
     
-    // Creamos el Objeto Geocoder
     var geocoder = new google.maps.Geocoder();
     
-    // Hacemos la petición indicando la dirección e invocamos la función
-    // geocodeResult enviando todo el resultado obtenido
+    // Hacemos la petición indicando la dirección e invocamos la función geocodeResult
     geocoder.geocode({ 'address': address}, geocodeResult);
 });
+
+
+
+
+//var num=26.59;
+
+//bien //num2=parseFloat(num).toFixed(1);
+//num2=num.toFixed(1);
+
+//alert(num2);
+
 </script>
 
 </html>
