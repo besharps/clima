@@ -12,6 +12,14 @@ function load_map(lat,lon) {
 
     map = new google.maps.Map($("#map_canvas").get(0), myOptions);
 
+    var input =(document.getElementById('address'));
+
+    var types = document.getElementById('type-selector');
+
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+    
     marker = new google.maps.Marker({
         position: myLatlng, 
         title: 'Usted está aquí!', 
@@ -29,66 +37,54 @@ function load_map(lat,lon) {
     google.maps.event.addListener(marker, 'mouseup', function(){
         infoMark(marker);
         var posicion = marker.getPosition();
-        //alert("Dentro del addListener de load_map, lat y long:"+posicion.lat()+posicion.lng());
         mostrarClima(posicion.lat(),posicion.lng());
     });  
-}
 
 
-function geocodeResult(results, status) {
+    /* codigo de autocompletado*/
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    
+    autocomplete.bindTo('bounds', map);
 
-    // Verificamos el estatus
-    if (status == 'OK') {
-        // Si hay resultados encontrados, centramos y repintamos el mapa
-        // esto para eliminar cualquier pin antes puesto
-        var mapOptions = {
-            center: results[0].geometry.location,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+
+    autocomplete.addListener('place_changed', function() {
         
-        map = new google.maps.Map($("#map_canvas").get(0), mapOptions);
+        var place = autocomplete.getPlace();
         
-        // fitBounds acercará el mapa con el zoom adecuado de acuerdo a lo buscado
-        map.fitBounds(results[0].geometry.viewport);
+        if (!place.geometry) {
+          window.alert("Lugar o ubicación erronea!!!");
+          return;
+        }
+
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } 
         
-        // Dibujamos un marcador con la ubicación del primer resultado obtenido
-        marker = new google.maps.Marker({
-            position: results[0].geometry.location, 
-            map: map,
-            draggable: true, 
-            animation: google.maps.Animation.DROP
-        });
+        marker.setPosition(place.geometry.location);
 
-        marker.setIcon('https://dl.dropboxusercontent.com/u/20056281/Iconos/male-2.png');
-
-        infoWindow = new google.maps.InfoWindow();
+        var posicion =place.geometry.location;
 
         infoMark(marker);
-        var posicion = marker.getPosition();
-        //alert("Dentro del addListener de load_map, lat y long:"+posicion.lat()+posicion.lng());
+
         mostrarClima(posicion.lat(),posicion.lng());
+    });
 
-        google.maps.event.addListener(marker, 'mouseup', function(){
-           
-            infoMark(marker);
-            var posicion = marker.getPosition();
-            //alert("Dentro del addListener de load_map, lat y long:"+posicion.lat()+posicion.lng());
-            mostrarClima(posicion.lat(),posicion.lng());
+      // Sets a listener on a radio button to change the filter type on Places
+      // Autocomplete.
+      function setupClickListener(id, types) {
+        var radioButton = document.getElementById(id);
+        radioButton.addEventListener('click', function() {
+          autocomplete.setTypes(types);
         });
+    }// fin de la funcion AddListener
 
-    } 
+      setupClickListener('changetype-all', []);
+      setupClickListener('changetype-address', ['address']);
+      setupClickListener('changetype-establishment', ['establishment']);
+     // setupClickListener('changetype-geocode', ['geocode']);
 
-    else {
-        // En caso de no haber resultados o que haya ocurrido un error
-        // lanzamos un mensaje con el error
-        //alert("Geocoding no tuvo éxito debido a: " + status);
-    
-        alert("Ciduad Inexistente!!");
-
-    }
-
-    $("#address").val("");
-}
+}// Fin de la funcion load map
 
 
 
@@ -177,7 +173,7 @@ function mostrarClima(latitud,longitud){
             respuesta="SEpS (Sureste por Sur)";
 
         if(grados>=150 && grados<=163)
-            respuesta="SSE (Sursurste)";
+            respuesta="SSE (Sursureste)";
 
         if(grados>163 && grados<=174)
             respuesta="SpE (Sur por Este)";
@@ -195,7 +191,7 @@ function mostrarClima(latitud,longitud){
             respuesta="SOpS (Suroeste por Sur)";
         
         if(grados>219 && grados<231)
-            respuesta="SOpS (Suroeste)";
+            respuesta="SO (Suroeste)";
         
         if(grados>=231 && grados<242)
             respuesta="SOpO (Suroeste por Oeste)";
@@ -228,7 +224,7 @@ function mostrarClima(latitud,longitud){
             respuesta="NNO (Nornoroeste)";
 
         if(grados>343 && grados<=354)
-            respuesta="NNO (Norte por Oeste)";
+            respuesta="NpO (Norte por Oeste)";
 
         if(grados<0 || grados>360)
             respuesta="Error de Coordenadas!";

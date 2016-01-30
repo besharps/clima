@@ -1,0 +1,79 @@
+body{
+  /*background: -moz-linear-gradient(#E6E6E6, #F2F2F2);*/
+   background: #E6E6E6 !important;
+}
+
+
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#address {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#address:focus {
+  border-color: #4d90fe;
+}
+
+.address-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#centro{
+  border:2px solid #BDBDBD;
+  background: #FFFFFF;
+  margin-top: 8%;
+}
+
+#map_canvas{
+  margin-top:15px;
+  margin-bottom: 15px;
+}
+
+#imagen{
+  width: 100px;
+}
+
+#primer_columna{
+  margin-top: 65% !important;
+}
+
+.btn_izq{
+  border:none !important;
+  background: #E6E6E6;
+}
+
+#currently-temperature{
+  font-size: 50px;
+}
+
+#ubicacion{
+  font-size: 20px;
+}
