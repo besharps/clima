@@ -12,7 +12,7 @@
 
 
 <!-- API que muestra la ubicación en un mapa y The Google Places Autocomplete API  -->  
-<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&language=es"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs9IPWFNn4LAOx8oRZ-SixSs84F8Hnk7Q&signed_in=true&libraries=places&language=es"
         async defer></script>  
 
 
@@ -85,15 +85,17 @@
     
     <div class="col-md-5">
       <p id="ubicacion">Buenos Aires, ARG</p>
-      <p id="currently-temperature text-center">28 ºC</p>
+      <p id="currently-temperature"></p>
       <p id="currently-summary"></p>        
-      <label for="">ST:</label><p id="currently-apparentTemperature"></p>
+      <label for="">ST: &nbsp; </label><span id="currently-apparentTemperature"></span>
     </div>
 
-    <div class="col-md-4">
-      <label for="">Humedad:</label><p id="currently-humidity"></p>
-      <label for="">Presión:</label><p id="currently-pressure"></p>
-      <label for="">Viento:</label><p id="currently-windSpeed"><span id="currently-windBearing"></span></p>
+    <div class="col-md-4" id="datos_secundarios">
+      <label for="">Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
+      <br/>
+      <label for="">Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
+      <br/>
+      <label for="">Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span>
     </div>          
   </div>
 

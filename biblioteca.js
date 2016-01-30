@@ -65,6 +65,8 @@ function load_map(lat,lon) {
 
         var posicion =place.geometry.location;
 
+        map.setZoom(12);
+
         infoMark(marker);
 
         mostrarClima(posicion.lat(),posicion.lng());
@@ -103,17 +105,15 @@ function mostrarClima(latitud,longitud){
       success: function (datoOrigen) {
         data = JSON.stringify(datoOrigen);
         clima = JSON.parse(data); 
-        $("#currently-summary").html("Descripción: " + clima.currently.summary);
-        $("#currently-temperature").html("Temperatura: " + redondear(clima.currently.temperature) + " ºC");
-        $("#currently-apparentTemperature").html("Sensación Térmica: " + redondear(clima.currently.apparentTemperature) + " ºC");
-        $("#currently-windSpeed").html("Velocidad del Viento: " + clima.currently.windSpeed + " km/h");
-        $("#currently-windBearing").html("Orientación del Viento: " + orientacion(clima.currently.windBearing));
-        $("#currently-humidity").html("Humedad: " + Math.round(clima.currently.humidity*100) +" %");
-        $("#currently-dewPoint").html("Punto de Rocio: " +redondear(clima.currently.dewPoint) + " ºC");
-        $("#currently-pressure").html("Presión: " + Math.round(clima.currently.pressure) + " hPa");
-        
-        //$("#currently-windSpeed").html("Velocidad del Viento: " + clima.currently.windSpeed);
-       
+        $("#currently-summary").html(clima.currently.summary);
+        $("#currently-temperature").html(redondear(clima.currently.temperature) + " ºC");
+        $("#currently-apparentTemperature").html(redondear(clima.currently.apparentTemperature) + " ºC");
+        $("#currently-windSpeed").html(redondear(clima.currently.windSpeed) + " km/h");
+        $("#currently-windBearing").html(orientacion(clima.currently.windBearing));
+        $("#currently-humidity").html(Math.round(clima.currently.humidity*100) +" %");
+       // $("#currently-dewPoint").html("Punto de Rocio: " +redondear(clima.currently.dewPoint) + " ºC");
+        $("#currently-pressure").html(Math.round(clima.currently.pressure) + " hPa");
+               
       },
       error: function(){
             alert("AJAX mal recibido..");
