@@ -1,8 +1,9 @@
-
+var flag=0;
 
 function load_map(lat,lon) {
 
     var myLatlng = new google.maps.LatLng(lat, lon);
+    var place;
 
     var myOptions = {
         zoom: 12,
@@ -15,6 +16,7 @@ function load_map(lat,lon) {
     var input =(document.getElementById('address'));
 
     var types = document.getElementById('type-selector');
+
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
@@ -35,8 +37,11 @@ function load_map(lat,lon) {
     infoMark(marker);
 
     google.maps.event.addListener(marker, 'mouseup', function(){
+        alert("dentro del mouseup");
         infoMark(marker);
         var posicion = marker.getPosition();
+
+        getNameLocation(posicion.lat(),posicion.lng());
         mostrarClima(posicion.lat(),posicion.lng());
     });  
 
@@ -47,9 +52,9 @@ function load_map(lat,lon) {
     autocomplete.bindTo('bounds', map);
 
 
-    autocomplete.addListener('place_changed', function() {
+    autocomplete.addListener('place_changed', function(){
         
-        var place = autocomplete.getPlace();
+        place = autocomplete.getPlace();
         
         if (!place.geometry) {
           window.alert("Lugar o ubicación erronea!!!");
@@ -69,11 +74,13 @@ function load_map(lat,lon) {
 
         infoMark(marker);
 
-        mostrarClima(posicion.lat(),posicion.lng());
+        //Copia el nombre autocompletado en el input de texto para mostrarlo junto a los datos de clima
+        copyName();
+       
+        mostrarClima(posicion.lat(),posicion.lng()); 
     });
 
-      // Sets a listener on a radio button to change the filter type on Places
-      // Autocomplete.
+      // Sets a listener on a radio button to change the filter type on Places Autocomplete.
       function setupClickListener(id, types) {
         var radioButton = document.getElementById(id);
         radioButton.addEventListener('click', function() {
@@ -85,14 +92,13 @@ function load_map(lat,lon) {
       setupClickListener('changetype-address', ['address']);
       setupClickListener('changetype-establishment', ['establishment']);
      // setupClickListener('changetype-geocode', ['geocode']);
-
+    
 }// Fin de la funcion load map
 
 
 
 //Función que conecta con la api de clima
 function mostrarClima(latitud,longitud){
-
 
     var config = "?units=si&lang=es"; 
 
@@ -104,7 +110,7 @@ function mostrarClima(latitud,longitud){
       dataType: "jsonp",
       success: function (datoOrigen) {
         data = JSON.stringify(datoOrigen);
-        clima = JSON.parse(data); 
+        clima = JSON.parse(data);
         $("#currently-summary").html(clima.currently.summary);
         $("#currently-temperature").html(redondear(clima.currently.temperature) + " ºC");
         $("#currently-apparentTemperature").html(redondear(clima.currently.apparentTemperature) + " ºC");
@@ -118,14 +124,16 @@ function mostrarClima(latitud,longitud){
       error: function(){
             alert("AJAX mal recibido..");
       }
-      
+
     });
+
 
 
     function redondear(numero){
 
         return numero.toFixed(1);
     }
+
 
     function orientacion(grados){
 
@@ -232,6 +240,7 @@ function mostrarClima(latitud,longitud){
         return respuesta;    
     }
 
+
 }
 
 
@@ -241,16 +250,55 @@ function infoMark(marker) {
     var markerLatLng = marker.getPosition();
     
     infoWindow.setContent([
-    'Coordenadas de la posición actual'+"<br/>",
      "Lat:"+markerLatLng.lat(),
      ' y ',
      "Lon:"+markerLatLng.lng(),
-     "<br/>"+'Arrastrar para actualizar la posición'
-    ].join(''));
+     "<br/>"+'Arrastrar para actualizar la posición'].join(''));
 
     infoWindow.open(map, marker);
 }
 
 
 
+function getNameLocation(lat, lng){
 
+        var latlng = new google.maps.LatLng(lat, lng);
+
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({'latLng': latlng}, function(resp, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+        
+            if (resp[1]) {
+
+                //formatted address
+                var lugar=resp[0].formatted_address;    
+                $("#currently-location").html(lugar);
+
+                alert("Nº1...Se ejecutó el getNameLocation!!!");
+            } 
+
+            else {
+              alert("No se hallaron resultados!!");
+            }
+
+          } 
+          else {
+            alert("La Geocodificación falló: " + status);
+          }
+
+        });
+               
+    }
+
+
+    function copyName(){
+
+        var direccion=$("#address").val();
+    
+        if(direccion!="" ){
+            $("#currently-location").html("");
+            $("#currently-location").html(direccion);
+        }
+
+    }

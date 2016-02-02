@@ -7,8 +7,6 @@ var marker;
 
 
 $(document).ready(function() {
-
-    
     
     if (navigator.geolocation){
 
@@ -18,9 +16,12 @@ $(document).ready(function() {
             lon = objPosition.coords.longitude;
             
             load_map(lat,lon);
-
+            
             mostrarClima(lat,lon);
 
+            //Llamado a la función que muestra el nombre de la ubicación junto a los datos del clima
+            getNameLocation(lat, lon);
+    
             },
             function(objPositionError){
 
@@ -41,15 +42,25 @@ $(document).ready(function() {
                 default:
                     alert("Error desconocido.");
                 }
+
+
+                lat = -34.6080668671682;
+                lon = -58.37044143676758;
+                
+                load_map(lat,lon);
+                mostrarClima(lat,lon);
             }    
         );
     }
     else{
         alert("Su navegador no soporta la API de geolocalización.");
+
+        lat = -34.6080668671682;
+        lon = -58.37044143676758;
+        
+        load_map(lat,lon);
+        mostrarClima(lat,lon);
     }
 
 });
-
-
- 
 
