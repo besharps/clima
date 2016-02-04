@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>B# clima</title>
 
 <!-- API que devuelve latitud y longitus de una ubicación-->
@@ -22,17 +22,22 @@
 <script src="biblioteca.js"></script>    
 <script src="eventos.js"></script>    
 
-<!-- Hoja de estilos -->
-<link rel="stylesheet" href="estilo.css">
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous" />
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+<!-- Hoja de estilos -->
+<link rel="stylesheet" href="estilo.css" />
+
+<!-- iconos del clima, Skycons de forecast -->
+<script src="skycons.js"></script>
 
 </head>
 
@@ -44,19 +49,17 @@
 <div>
 	<input type="text" maxlength="100" id="address" placeholder="Ingrese una ubicación" class="controls" /> 
 
-    <div id="type-selector" class="controls">
-      <input type="radio" name="type" id="changetype-all" checked="checked">
-      <label for="changetype-all">Todo</label>
-
-      <input type="radio" name="type" id="changetype-establishment">
-      <label for="changetype-establishment">Establecimientos</label>
-
-      <input type="radio" name="type" id="changetype-address">
-      <label for="changetype-address">Direcciones</label>
-
-     <!--  <input type="radio" name="type" id="changetype-geocode">
-      <label for="changetype-geocode">Geo-códigos</label>  -->
+    <div class="dropdown" id="type-selector">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filtrar
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><input type="radio" name="type" id="changetype-all" checked="checked"/>Todo</li>
+        <li><input type="radio" name="type" id="changetype-establishment">Establecimientos</li>
+        <li><input type="radio" name="type" id="changetype-address">Direcciones</li>
+        <li><input type="radio" name="type" id="changetype-geocode">Geo-códigos</li>
+      </ul>
     </div>
+
 </div>
 
 <br/>
@@ -64,10 +67,11 @@
 <!-- Primer columna -->
 <div class="col-md-3">
 
+  <h2>B# Weather</h2>
   <div id="primer_columna">
-    <button id="btn_actual" class="btn btn_izq">Estado Actual</button>
+    <button id="btn_pr_actual" class="btn btn_izq">Estado Actual</button>
     <br/>
-    <button class="btn btn_izq">Pronóstico Extendiddo</button>
+    <button id="btn_pr_extend" class="btn btn_izq">Pronóstico Extendiddo</button>
   </div>  
     
 </div>
@@ -79,24 +83,31 @@
 
   <div id="actual" class="row">
 
-    <div class="col-md-3 text-center">
-      <img src="img/sol.gif" id="imagen" />
-    </div>
-    
-    <div class="col-md-5">
-      <p id="currently-location"></p>
-      <p id="currently-temperature"></p>
-      <p id="currently-summary"></p>        
-      <label for="">ST: &nbsp; </label><span id="currently-apparentTemperature"></span>
-    </div>
+    <div id="info_currently">
 
-    <div class="col-md-4" id="datos_secundarios">
-      <label for="">Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
-      <br/>
-      <label for="">Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
-      <br/>
-      <label for="">Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span>
-    </div>          
+      <div class="col-md-3 text-center">
+        <div id="icono">
+          <canvas id="currently-icon" width="100" height="100"></canvas>  
+        </div>
+      </div>
+      
+      <div class="col-md-5">
+        <p id="currently-location"></p>
+        <p id="currently-temperature"></p>
+        <p id="currently-summary"></p>        
+        <label for="">ST: &nbsp; </label><span id="currently-apparentTemperature"></span>
+      </div>
+
+      <div class="col-md-4" id="datos_secundarios">
+        <label for="">Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
+        <br/>
+        <label for="">Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
+        <br/>
+        <label for="">Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span>
+      </div>  
+  </div>
+
+
   </div>
 
   <br/>
@@ -118,19 +129,175 @@
 <br/>
 <br/>
 
-<!--
-<div id="Semanal">
-<h3> Pronostico Semanal </h3>
-<p id="currently-summary"></p>            
-<p id="currently-temperature "></p>  
-<p id="currently-apparentTemperature"></p>
-<p id="currently-windSpeed"></p>
-<p id="currently-humidity"></p>        
-<p id="currently-windBearing"></p>
-<p id="currently-dewPoint"></p>
-<p id="currently-pressure"></p>        
+
+<div id="info_extend">
+  <div class="row">
+    <div class="col-md-12">
+      <h3> Pronóstico Semanal </h3>
+    </div>
+  </div>
+
+  <br/>
+  <span>Resumen general: </span><p id="daily-general-summary"></p>
+  <br/>
+
+  <h4>HOY</h4>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <div class="icono-clima">
+        <canvas id="icon" class="icon"></canvas>  
+      </div>
+    </div>
+  </div>
+  <p>Resumen: <span id="daily-summary"></span></p>            
+  <p>Temperatura Mínima: <span id="daily-temperatureMin"></span></p>
+  <p>Temperatura Máxima: <span id="daily-temperatureMax"></span></p>    
+  <p>Sensación Térmica Mínima: <span id="daily-apparentTemperatureMin"></span></p>
+  <p>Sensación Térmica Máxima: <span id="daily-apparentTemperatureMax"></span></p>
+  <p>Velocidad del Viento: <span id="daily-windSpeed"></span> &nbsp;<span id="daily-windBearing"></span></p>
+  <p>Humedad: <span id="daily-humidity"></span></p>          
+  <p>Presión: <span id="daily-pressure"></span></p>
+
+  <br/>
+  <br/>
+
+  <h4>DÍA 1</h4>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <div class="icono-clima">
+        <canvas id="icon1" class="icon"></canvas>  
+      </div>
+    </div>
+  </div>
+  <p>Resumen: <span id="daily-summary1"></span></p>            
+  <p>Temperatura Mínima: <span id="daily-temperatureMin1"></span></p>
+  <p>Temperatura Máxima: <span id="daily-temperatureMax1"></span></p>    
+  <p>Sensación Térmica Mínima: <span id="daily-apparentTemperatureMin1"></span></p>
+  <p>Sensación Térmica Máxima: <span id="daily-apparentTemperatureMax1"></span></p>
+  <p>Velocidad del Viento: <span id="daily-windSpeed1"></span> &nbsp;<span id="daily-windBearing1"></span></p>
+  <p>Humedad: <span id="daily-humidity1"></span></p>          
+  <p>Presión: <span id="daily-pressure1"></span></p>        
+
+  <br/>
+  <br/>
+
+  <h4>DÍA 2</h4>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <div class="icono-clima">
+        <canvas id="icon2" class="icon"></canvas>  
+      </div>
+    </div>
+  </div>
+  <p>Resumen: <span id="daily-summary2"></span></p>            
+  <p>Temperatura Mínima: <span id="daily-temperatureMin2"></span></p>
+  <p>Temperatura Máxima: <span id="daily-temperatureMax2"></span></p>    
+  <p>Sensación Térmica Mínima: <span id="daily-apparentTemperatureMin2"></span></p>
+  <p>Sensación Térmica Máxima: <span id="daily-apparentTemperatureMax2"></span></p>
+  <p>Velocidad del Viento: <span id="daily-windSpeed2"></span> &nbsp;<span id="daily-windBearing2"></span></p>
+  <p>Humedad: <span id="daily-humidity2"></span></p>          
+  <p>Presión: <span id="daily-pressure2"></span></p>
+
+  <br/>
+  <br/>
+
+  <h4>DÍA 3</h4>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <div class="icono-clima">
+        <canvas id="icon3" class="icon"></canvas>  
+      </div>
+    </div>
+  </div>
+  <p>Resumen: <span id="daily-summary3"></span></p>            
+  <p>Temperatura Mínima: <span id="daily-temperatureMin3"></span></p>
+  <p>Temperatura Máxima: <span id="daily-temperatureMax3"></span></p>    
+  <p>Sensación Térmica Mínima: <span id="daily-apparentTemperatureMin3"></span></p>
+  <p>Sensación Térmica Máxima: <span id="daily-apparentTemperatureMax3"></span></p>
+  <p>Velocidad del Viento: <span id="daily-windSpeed3"></span> &nbsp;<span id="daily-windBearing3"></span></p>
+  <p>Humedad: <span id="daily-humidity3"></span></p>          
+  <p>Presión: <span id="daily-pressure3"></span></p>
+
+  <br/>
+  <br/>
+
+  <h4>DÍA 4</h4>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <div class="icono-clima">
+        <canvas id="icon4" class="icon"></canvas>  
+      </div>
+    </div>
+  </div>
+  <p>Resumen: <span id="daily-summary4"></span></p>            
+  <p>Temperatura Mínima: <span id="daily-temperatureMin4"></span></p>
+  <p>Temperatura Máxima: <span id="daily-temperatureMax4"></span></p>    
+  <p>Sensación Térmica Mínima: <span id="daily-apparentTemperatureMin4"></span></p>
+  <p>Sensación Térmica Máxima: <span id="daily-apparentTemperatureMax4"></span></p>
+  <p>Velocidad del Viento: <span id="daily-windSpeed4"></span> &nbsp;<span id="daily-windBearing4"></span></p>
+  <p>Humedad: <span id="daily-humidity4"></span></p>          
+  <p>Presión: <span id="daily-pressure4"></span></p>
+
+  <br/>
+  <br/>
+
+  <h4>DÍA 5</h4>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <div class="icono-clima">
+        <canvas id="icon5" class="icon"></canvas>  
+      </div>
+    </div>
+  </div>
+  <p>Resumen: <span id="daily-summary5"></span></p>            
+  <p>Temperatura Mínima: <span id="daily-temperatureMin5"></span></p>
+  <p>Temperatura Máxima: <span id="daily-temperatureMax5"></span></p>    
+  <p>Sensación Térmica Mínima: <span id="daily-apparentTemperatureMin5"></span></p>
+  <p>Sensación Térmica Máxima: <span id="daily-apparentTemperatureMax5"></span></p>
+  <p>Velocidad del Viento: <span id="daily-windSpeed5"></span> &nbsp;<span id="daily-windBearing5"></span></p>
+  <p>Humedad: <span id="daily-humidity5"></span></p>          
+  <p>Presión: <span id="daily-pressure5"></span></p>
+
+  <br/>
+  <br/>
+
+  <h4>DÍA 6</h4>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <div class="icono-clima">
+        <canvas id="icon6" class="icon"></canvas>  
+      </div>
+    </div>
+  </div>
+  <p>Resumen: <span id="daily-summary6"></span></p>            
+  <p>Temperatura Mínima: <span id="daily-temperatureMin6"></span></p>
+  <p>Temperatura Máxima: <span id="daily-temperatureMax6"></span></p>    
+  <p>Sensación Térmica Mínima: <span id="daily-apparentTemperatureMin6"></span></p>
+  <p>Sensación Térmica Máxima: <span id="daily-apparentTemperatureMax6"></span></p>
+  <p>Velocidad del Viento: <span id="daily-windSpeed6"></span> &nbsp;<span id="daily-windBearing6"></span></p>
+  <p>Humedad: <span id="daily-humidity6"></span></p>          
+  <p>Presión: <span id="daily-pressure6"></span></p>
+
+  <br/>
+  <br/>
+
+  <h4>DÍA 7</h4>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <div class="icono-clima">
+        <canvas id="icon7" class="icon"></canvas>  
+      </div>
+    </div>
+  </div>
+  <p>Resumen: <span id="daily-summary7"></span></p>            
+  <p>Temperatura Mínima: <span id="daily-temperatureMin7"></span></p>
+  <p>Temperatura Máxima: <span id="daily-temperatureMax7"></span></p>    
+  <p>Sensación Térmica Mínima: <span id="daily-apparentTemperatureMin7"></span></p>
+  <p>Sensación Térmica Máxima: <span id="daily-apparentTemperatureMax7"></span></p>
+  <p>Velocidad del Viento: <span id="daily-windSpeed7"></span> &nbsp;<span id="daily-windBearing7"></span></p>
+  <p>Humedad: <span id="daily-humidity7"></span></p>          
+  <p>Presión: <span id="daily-pressure7"></span></p>
 </div>
--->
 
 
 <div class="row">

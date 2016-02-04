@@ -8,7 +8,12 @@ function load_map(lat,lon) {
     var myOptions = {
         zoom: 12,
         center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        position: google.maps.ControlPosition.RIGHT_TOP
+        }
     };
 
     map = new google.maps.Map($("#map_canvas").get(0), myOptions);
@@ -37,7 +42,6 @@ function load_map(lat,lon) {
     infoMark(marker);
 
     google.maps.event.addListener(marker, 'mouseup', function(){
-        alert("dentro del mouseup");
         infoMark(marker);
         var posicion = marker.getPosition();
 
@@ -100,6 +104,10 @@ function load_map(lat,lon) {
 //Función que conecta con la api de clima
 function mostrarClima(latitud,longitud){
 
+    //Instanciando una clase para icono del clima
+    var skycons = new Skycons({"color": "white"});
+
+
     var config = "?units=si&lang=es"; 
 
     var url="https://api.forecast.io/forecast/18d55f569c782af0f78c9b4156afeb37/" + latitud + "," + longitud + config;
@@ -111,15 +119,119 @@ function mostrarClima(latitud,longitud){
       success: function (datoOrigen) {
         data = JSON.stringify(datoOrigen);
         clima = JSON.parse(data);
+        //Datos del pronóstico actual
         $("#currently-summary").html(clima.currently.summary);
         $("#currently-temperature").html(redondear(clima.currently.temperature) + " ºC");
         $("#currently-apparentTemperature").html(redondear(clima.currently.apparentTemperature) + " ºC");
         $("#currently-windSpeed").html(redondear(clima.currently.windSpeed) + " km/h");
         $("#currently-windBearing").html(orientacion(clima.currently.windBearing));
         $("#currently-humidity").html(Math.round(clima.currently.humidity*100) +" %");
-       // $("#currently-dewPoint").html("Punto de Rocio: " +redondear(clima.currently.dewPoint) + " ºC");
         $("#currently-pressure").html(Math.round(clima.currently.pressure) + " hPa");
-               
+        skycons.add("currently-icon", clima.currently.icon);       
+
+        //Datos del pronóstico extendido
+
+        //General summary
+        $("#daily-general-summary").html(clima.daily.summary);
+        //Hoy
+        $("#daily-summary").html(clima.daily.data[0].summary);
+        $("#daily-temperatureMin").html(redondear(clima.daily.data[0].temperatureMin) + " ºC");
+        $("#daily-temperatureMax").html(redondear(clima.daily.data[0].temperatureMax) + " ºC");
+        $("#daily-apparentTemperatureMin").html(redondear(clima.daily.data[0].apparentTemperatureMin) + " ºC");
+        $("#daily-apparentTemperatureMax").html(redondear(clima.daily.data[0].apparentTemperatureMax) + " ºC");
+        $("#daily-windSpeed").html(redondear(clima.daily.data[0].windSpeed) + " km/h");
+        $("#daily-windBearing").html(orientacion(clima.daily.data[0].windBearing));
+        $("#daily-humidity").html(Math.round(clima.daily.data[0].humidity*100) +" %");
+        $("#daily-pressure").html(Math.round(clima.daily.data[0].pressure) + " hPa");
+        skycons.add("icon", clima.daily.data[0].icon);
+
+        //Día 1
+        $("#daily-summary1").html(clima.daily.data[1].summary);
+        $("#daily-temperatureMin1").html(redondear(clima.daily.data[1].temperatureMin) + " ºC");
+        $("#daily-temperatureMax1").html(redondear(clima.daily.data[1].temperatureMax) + " ºC");
+        $("#daily-apparentTemperatureMin1").html(redondear(clima.daily.data[1].apparentTemperatureMin) + " ºC");
+        $("#daily-apparentTemperatureMax1").html(redondear(clima.daily.data[1].apparentTemperatureMax) + " ºC");
+        $("#daily-windSpeed1").html(redondear(clima.daily.data[1].windSpeed) + " km/h");
+        $("#daily-windBearing1").html(orientacion(clima.daily.data[1].windBearing));
+        $("#daily-humidity1").html(Math.round(clima.daily.data[1].humidity*100) +" %");
+        $("#daily-pressure1").html(Math.round(clima.daily.data[1].pressure) + " hPa");
+        skycons.add("icon1", clima.daily.data[1].icon);
+
+        //Día 2
+        $("#daily-summary2").html(clima.daily.data[2].summary);
+        $("#daily-temperatureMin2").html(redondear(clima.daily.data[2].temperatureMin) + " ºC");
+        $("#daily-temperatureMax2").html(redondear(clima.daily.data[2].temperatureMax) + " ºC");
+        $("#daily-apparentTemperatureMin2").html(redondear(clima.daily.data[2].apparentTemperatureMin) + " ºC");
+        $("#daily-apparentTemperatureMax2").html(redondear(clima.daily.data[2].apparentTemperatureMax) + " ºC");
+        $("#daily-windSpeed2").html(redondear(clima.daily.data[2].windSpeed) + " km/h");
+        $("#daily-windBearing2").html(orientacion(clima.daily.data[2].windBearing));
+        $("#daily-humidity2").html(Math.round(clima.daily.data[2].humidity*100) +" %");
+        $("#daily-pressure2").html(Math.round(clima.daily.data[2].pressure) + " hPa");
+        skycons.add("icon2", clima.daily.data[2].icon);
+
+        //Día 3
+        $("#daily-summary3").html(clima.daily.data[3].summary);
+        $("#daily-temperatureMin3").html(redondear(clima.daily.data[3].temperatureMin) + " ºC");
+        $("#daily-temperatureMax3").html(redondear(clima.daily.data[3].temperatureMax) + " ºC");
+        $("#daily-apparentTemperatureMin3").html(redondear(clima.daily.data[3].apparentTemperatureMin) + " ºC");
+        $("#daily-apparentTemperatureMax3").html(redondear(clima.daily.data[3].apparentTemperatureMax) + " ºC");
+        $("#daily-windSpeed3").html(redondear(clima.daily.data[3].windSpeed) + " km/h");
+        $("#daily-windBearing3").html(orientacion(clima.daily.data[3].windBearing));
+        $("#daily-humidity3").html(Math.round(clima.daily.data[3].humidity*100) +" %");
+        $("#daily-pressure3").html(Math.round(clima.daily.data[3].pressure) + " hPa");
+        skycons.add("icon3", clima.daily.data[3].icon);
+
+        //Día 4
+        $("#daily-summary4").html(clima.daily.data[4].summary);
+        $("#daily-temperatureMin4").html(redondear(clima.daily.data[4].temperatureMin) + " ºC");
+        $("#daily-temperatureMax4").html(redondear(clima.daily.data[4].temperatureMax) + " ºC");
+        $("#daily-apparentTemperatureMin4").html(redondear(clima.daily.data[4].apparentTemperatureMin) + " ºC");
+        $("#daily-apparentTemperatureMax4").html(redondear(clima.daily.data[4].apparentTemperatureMax) + " ºC");
+        $("#daily-windSpeed4").html(redondear(clima.daily.data[4].windSpeed) + " km/h");
+        $("#daily-windBearing4").html(orientacion(clima.daily.data[4].windBearing));
+        $("#daily-humidity4").html(Math.round(clima.daily.data[4].humidity*100) +" %");
+        $("#daily-pressure4").html(Math.round(clima.daily.data[4].pressure) + " hPa");
+        skycons.add("icon4", clima.daily.data[4].icon);
+
+        //Día 5
+        $("#daily-summary5").html(clima.daily.data[5].summary);
+        $("#daily-temperatureMin5").html(redondear(clima.daily.data[5].temperatureMin) + " ºC");
+        $("#daily-temperatureMax5").html(redondear(clima.daily.data[5].temperatureMax) + " ºC");
+        $("#daily-apparentTemperatureMin5").html(redondear(clima.daily.data[5].apparentTemperatureMin) + " ºC");
+        $("#daily-apparentTemperatureMax5").html(redondear(clima.daily.data[5].apparentTemperatureMax) + " ºC");
+        $("#daily-windSpeed5").html(redondear(clima.daily.data[5].windSpeed) + " km/h");
+        $("#daily-windBearing5").html(orientacion(clima.daily.data[5].windBearing));
+        $("#daily-humidity5").html(Math.round(clima.daily.data[5].humidity*100) +" %");
+        $("#daily-pressure5").html(Math.round(clima.daily.data[5].pressure) + " hPa");
+        skycons.add("icon5", clima.daily.data[5].icon);
+
+        //Día 6
+        $("#daily-summary6").html(clima.daily.data[6].summary);
+        $("#daily-temperatureMin6").html(redondear(clima.daily.data[6].temperatureMin) + " ºC");
+        $("#daily-temperatureMax6").html(redondear(clima.daily.data[6].temperatureMax) + " ºC");
+        $("#daily-apparentTemperatureMin6").html(redondear(clima.daily.data[6].apparentTemperatureMin) + " ºC");
+        $("#daily-apparentTemperatureMax6").html(redondear(clima.daily.data[6].apparentTemperatureMax) + " ºC");
+        $("#daily-windSpeed6").html(redondear(clima.daily.data[6].windSpeed) + " km/h");
+        $("#daily-windBearing6").html(orientacion(clima.daily.data[6].windBearing));
+        $("#daily-humidity6").html(Math.round(clima.daily.data[6].humidity*100) +" %");
+        $("#daily-pressure6").html(Math.round(clima.daily.data[6].pressure) + " hPa");
+        skycons.add("icon6", clima.daily.data[6].icon);
+
+        //Día 7
+        $("#daily-summary7").html(clima.daily.data[7].summary);
+        $("#daily-temperatureMin7").html(redondear(clima.daily.data[7].temperatureMin) + " ºC");
+        $("#daily-temperatureMax7").html(redondear(clima.daily.data[7].temperatureMax) + " ºC");
+        $("#daily-apparentTemperatureMin7").html(redondear(clima.daily.data[7].apparentTemperatureMin) + " ºC");
+        $("#daily-apparentTemperatureMax7").html(redondear(clima.daily.data[7].apparentTemperatureMax) + " ºC");
+        $("#daily-windSpeed7").html(redondear(clima.daily.data[7].windSpeed) + " km/h");
+        $("#daily-windBearing7").html(orientacion(clima.daily.data[7].windBearing));
+        $("#daily-humidity7").html(Math.round(clima.daily.data[7].humidity*100) +" %");
+        $("#daily-pressure7").html(Math.round(clima.daily.data[7].pressure) + " hPa");
+        skycons.add("icon7", clima.daily.data[7].icon);
+
+        //Animación para los iconos del clima
+        skycons.play();
+
       },
       error: function(){
             alert("AJAX mal recibido..");
@@ -274,8 +386,6 @@ function getNameLocation(lat, lng){
                 //formatted address
                 var lugar=resp[0].formatted_address;    
                 $("#currently-location").html(lugar);
-
-                alert("Nº1...Se ejecutó el getNameLocation!!!");
             } 
 
             else {

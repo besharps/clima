@@ -35,9 +35,10 @@ body{
 }
 
 #type-selector {
-  color: #fff;
-  background-color: #4d90fe;
-  padding: 5px 11px 0px 11px;
+  /*color: #fff;
+  background-color: #4d90fe;*/
+  padding: 0px 11px 0px 11px;
+  margin-left: 0px;
 }
 
 #type-selector label {
@@ -57,9 +58,10 @@ body{
   margin-bottom: 15px;
 }
 
+/*
 #imagen{
   width: 100px;
-}
+}*/
 
 #primer_columna{
   margin-top: 65% !important;
@@ -77,3 +79,29 @@ body{
 #ubicacion{
   font-size: 20px;
 }
+
+
+#info_extend{
+  display: none;
+}
+
+#icono, .icono-clima{
+  background-color: #B404AE !important;
+}
+
+.icon{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+
+
+
+/* No funciona porque el html al que hace referencia no está en mi dominio */
+div.login-control{
+  display:none !important;
+}
+
+
+
+

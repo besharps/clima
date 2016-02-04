@@ -62,5 +62,23 @@ $(document).ready(function() {
         mostrarClima(lat,lon);
     }
 
+
+
+    //pronóstico actual    
+    $("#btn_pr_actual").click(function(){
+
+        $("#info_extend").hide();
+        $("#info_currently").show();  
+
+    });
+
+    //pronóstico extendido    
+    $("#btn_pr_extend").click(function(){
+
+        $("#info_currently").hide();
+        $("#info_extend").show();  
+
+    });
+
 });
 
