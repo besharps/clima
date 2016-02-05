@@ -146,6 +146,7 @@ function mostrarClima(latitud,longitud){
         skycons.add("icon", clima.daily.data[0].icon);
 
         //Día 1
+        $("#day1").html(showday(1));
         $("#daily-summary1").html(clima.daily.data[1].summary);
         $("#daily-temperatureMin1").html(redondear(clima.daily.data[1].temperatureMin) + " ºC");
         $("#daily-temperatureMax1").html(redondear(clima.daily.data[1].temperatureMax) + " ºC");
@@ -158,6 +159,7 @@ function mostrarClima(latitud,longitud){
         skycons.add("icon1", clima.daily.data[1].icon);
 
         //Día 2
+        $("#day2").html(showday(2));
         $("#daily-summary2").html(clima.daily.data[2].summary);
         $("#daily-temperatureMin2").html(redondear(clima.daily.data[2].temperatureMin) + " ºC");
         $("#daily-temperatureMax2").html(redondear(clima.daily.data[2].temperatureMax) + " ºC");
@@ -170,6 +172,7 @@ function mostrarClima(latitud,longitud){
         skycons.add("icon2", clima.daily.data[2].icon);
 
         //Día 3
+        $("#day3").html(showday(3));
         $("#daily-summary3").html(clima.daily.data[3].summary);
         $("#daily-temperatureMin3").html(redondear(clima.daily.data[3].temperatureMin) + " ºC");
         $("#daily-temperatureMax3").html(redondear(clima.daily.data[3].temperatureMax) + " ºC");
@@ -182,6 +185,7 @@ function mostrarClima(latitud,longitud){
         skycons.add("icon3", clima.daily.data[3].icon);
 
         //Día 4
+        $("#day4").html(showday(4));
         $("#daily-summary4").html(clima.daily.data[4].summary);
         $("#daily-temperatureMin4").html(redondear(clima.daily.data[4].temperatureMin) + " ºC");
         $("#daily-temperatureMax4").html(redondear(clima.daily.data[4].temperatureMax) + " ºC");
@@ -194,6 +198,7 @@ function mostrarClima(latitud,longitud){
         skycons.add("icon4", clima.daily.data[4].icon);
 
         //Día 5
+        $("#day5").html(showday(5));
         $("#daily-summary5").html(clima.daily.data[5].summary);
         $("#daily-temperatureMin5").html(redondear(clima.daily.data[5].temperatureMin) + " ºC");
         $("#daily-temperatureMax5").html(redondear(clima.daily.data[5].temperatureMax) + " ºC");
@@ -206,6 +211,7 @@ function mostrarClima(latitud,longitud){
         skycons.add("icon5", clima.daily.data[5].icon);
 
         //Día 6
+        $("#day6").html(showday(6));
         $("#daily-summary6").html(clima.daily.data[6].summary);
         $("#daily-temperatureMin6").html(redondear(clima.daily.data[6].temperatureMin) + " ºC");
         $("#daily-temperatureMax6").html(redondear(clima.daily.data[6].temperatureMax) + " ºC");
@@ -218,6 +224,7 @@ function mostrarClima(latitud,longitud){
         skycons.add("icon6", clima.daily.data[6].icon);
 
         //Día 7
+        $("#day7").html(showday(7));
         $("#daily-summary7").html(clima.daily.data[7].summary);
         $("#daily-temperatureMin7").html(redondear(clima.daily.data[7].temperatureMin) + " ºC");
         $("#daily-temperatureMax7").html(redondear(clima.daily.data[7].temperatureMax) + " ºC");
@@ -412,3 +419,27 @@ function getNameLocation(lat, lng){
         }
 
     }
+
+
+    //Función que muestra el nombre de los días de la semana en el pron. extendido
+    function showday(numero){
+
+        var fecha=new Date();
+        var hoy=fecha.getDay();
+        var respuesta=0;
+
+        hoy=hoy+numero;
+
+        if(hoy >6) hoy=hoy-7;
+
+        if(hoy==0) respuesta="Domingo";
+        if(hoy==1) respuesta="Lunes";
+        if(hoy==2) respuesta="Martes";
+        if(hoy==3) respuesta="Miércoles";
+        if(hoy==4) respuesta="Jueves";
+        if(hoy==5) respuesta="Viernes";
+        if(hoy==6) respuesta="Sábado"; 
+
+        return respuesta;
+    }
+
