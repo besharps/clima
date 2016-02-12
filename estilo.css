@@ -1,5 +1,4 @@
 body{
-  /*background: -moz-linear-gradient(#E6E6E6, #F2F2F2);*/
    background: #E6E6E6 !important;
 }
 
@@ -47,11 +46,44 @@ body{
   font-weight: 300;
 }
 
-#centro{
+
+#logo{
+  color: white;
+  font-weight: bold;
+  position:absolute;
+  z-index: 2;
+  margin-top: 80%;
+}
+
+#recuadro{
   border:2px solid #BDBDBD;
   background: #FFFFFF;
-  margin-top: 8%;
+  position:absolute;
+  margin-top: 30%;
+  /*margin-left: 25%;
+  margin-right: 15%;*/
+  z-index: 3;
 }
+
+
+#botones{
+  margin-top: 140%;
+  position: absolute;
+  z-index: 2;
+  border: 2px solid blue;
+  margin-left: 0px;
+  float: left;
+  width: 260px;
+}
+
+
+#foto-ciudad{
+  border: 2px solid red;
+  position: absolute;
+  z-index: 1; 
+}
+
+
 
 #map_canvas{
   margin-top:15px;
@@ -63,14 +95,28 @@ body{
   width: 100px;
 }*/
 
-#primer_columna{
-  margin-top: 65% !important;
+#izquierda{
+  border: 2px dotted blue;
+  padding-left: 0px;
+  height: 750px;
 }
 
 .btn_izq{
+  font-style: Roboto;
+  font-size: 20px;
+  font-family: Roboto;
+  font-weight: bold;
   border:none !important;
   background: #E6E6E6;
+  width: 235px;
+  text-align: left;
 }
+
+.btn_izq:hover{
+  font-weight: bold;
+  background: gray;
+}
+
 
 #currently-temperature{
   font-size: 50px !important;
@@ -96,11 +142,23 @@ body{
 }
 
 
+#contenedor{
+  position:relative;
+}
+
+
+.lef{
+  float: left;
+}
+
+.clear{
+  float: clear;
+}
 
 /* No funciona porque el html al que hace referencia no está en mi dominio */
-div.login-control{
+/*div.login-control{
   display:none !important;
-}
+}*/
 
 
 
