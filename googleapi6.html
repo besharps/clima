@@ -11,7 +11,8 @@
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>	
 
 <!-- API que muestra la ubicación en un mapa-->
-<script src="http://maps.google.com/maps/api/js?language=es"></script>
+<script src="http://maps.google.com/maps/api/js?language=es&libraries=places"></script>
+
 
 <!-- Biblioteca de funciones-->
 <script src="biblioteca.js"></script>    
@@ -40,7 +41,7 @@
 
 <div>
 	<input type="text" maxlength="100" id="address" placeholder="Ingrese la Dirección" style="width:600px"/> 
-	<input type="button" id="search" value="Buscar" />
+	<input type="button" id="search" value="Buscar" class="btn primary" />
 </div>
 
 <br/>
@@ -89,23 +90,14 @@ $('#search').click( function() {
 
     // Guardamos la dirección 
     var address = $('#address').val();
-    
+
     var geocoder = new google.maps.Geocoder();
     
     // Hacemos la petición indicando la dirección e invocamos la función geocodeResult
     geocoder.geocode({ 'address': address}, geocodeResult);
 });
 
-
-
-
-//var num=26.59;
-
-//bien //num2=parseFloat(num).toFixed(1);
-//num2=num.toFixed(1);
-
-//alert(num2);
-
 </script>
+
 
 </html>

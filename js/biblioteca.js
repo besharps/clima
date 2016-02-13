@@ -39,10 +39,10 @@ function load_map(lat,lon) {
 
     infoWindow = new google.maps.InfoWindow();
 
-    infoMark(marker);
+    //infoMark(marker);
 
     google.maps.event.addListener(marker, 'mouseup', function(){
-        infoMark(marker);
+        //infoMark(marker);
         var posicion = marker.getPosition();
 
         getNameLocation(posicion.lat(),posicion.lng());
@@ -76,7 +76,7 @@ function load_map(lat,lon) {
 
         map.setZoom(12);
 
-        infoMark(marker);
+        //infoMark(marker);
 
         //Copia el nombre autocompletado en el input de texto para mostrarlo junto a los datos de clima
         copyName();
@@ -363,7 +363,7 @@ function mostrarClima(latitud,longitud){
 }
 
 
-
+/*
 function infoMark(marker) {
         
     var markerLatLng = marker.getPosition();
@@ -376,7 +376,7 @@ function infoMark(marker) {
 
     infoWindow.open(map, marker);
 }
-
+*/
 
 
 function getNameLocation(lat, lng){

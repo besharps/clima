@@ -15,7 +15,6 @@ body{
 }
 
 #address {
-  background-color: #fff;
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
@@ -34,8 +33,6 @@ body{
 }
 
 #type-selector {
-  /*color: #fff;
-  background-color: #4d90fe;*/
   padding: 0px 11px 0px 11px;
   margin-left: 0px;
 }
@@ -60,8 +57,6 @@ body{
   background: #FFFFFF;
   position:absolute;
   margin-top: 30%;
-  /*margin-left: 25%;
-  margin-right: 15%;*/
   z-index: 3;
 }
 
@@ -70,7 +65,6 @@ body{
   margin-top: 140%;
   position: absolute;
   z-index: 2;
-  border: 2px solid blue;
   margin-left: 0px;
   float: left;
   width: 260px;
@@ -96,7 +90,6 @@ body{
 }*/
 
 #izquierda{
-  border: 2px dotted blue;
   padding-left: 0px;
   height: 750px;
 }
@@ -105,10 +98,9 @@ body{
   font-style: Roboto;
   font-size: 20px;
   font-family: Roboto;
-  font-weight: bold;
   border:none !important;
   background: #E6E6E6;
-  width: 235px;
+  width: 250px;
   text-align: left;
 }
 
@@ -120,6 +112,7 @@ body{
 
 #currently-temperature{
   font-size: 50px !important;
+  font-weight: bold;
 }
 
 #ubicacion{
@@ -154,6 +147,20 @@ body{
 .clear{
   float: clear;
 }
+
+#centro{
+  padding-left: 0px;
+}
+
+.icon-black{
+  max-width: 15px;
+}
+
+
+
+
+
+
 
 /* No funciona porque el html al que hace referencia no está en mi dominio */
 /*div.login-control{

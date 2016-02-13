@@ -19,8 +19,8 @@
 
 
 <!-- Biblioteca de funciones-->
-<script src="biblioteca.js"></script>    
-<script src="eventos.js"></script>    
+<script src="js/biblioteca.js"></script>    
+<script src="js/eventos.js"></script>    
 
 
 <!-- Material Design fonts -->
@@ -29,24 +29,35 @@
 
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script> 
 
 <!-- Bootstrap Material Design -->
-<link rel="stylesheet" type="text/css" href="dist/css/bootstrap-material-design.css">
-<link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
+<link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+<script src="js/ripples.min.js"></script>
+<script src="js/material.min.js"></script>
+<script src="js/snackbar.min.js"></script>
+<script src="js/jquery.nouislider.min.js"></script>    
 
+<!-- Dropdowns de bootstrap M design -->
+<link rel="stylesheet" type="text/css" href="css/jquery.dropdown.css">
+<!-- <script src="js/jquery.dropdown.js"></script> -->
 
 <!-- Hoja de estilos -->
-<link rel="stylesheet" href="estilo.css" />
+<link rel="stylesheet" href="css/estilo.css" />
 
 <!-- iconos del clima, Skycons de forecast -->
-<script src="skycons.js"></script>
+<script src="js/skycons.js"></script>
 
 </head>
 
 <body>
 
 <div>
-	<input type="text" maxlength="100" id="address" placeholder="Ingrese una ubicación" class="controls" /> 
+	<!-- <input type="text" maxlength="100" id="address"  class="controls" /> -->
+ 
+    <input placeholder="Ingrese una ubicación" maxlength="100" class="form-control controls" id="address" type="text">
+
 
     <div class="dropdown" id="type-selector">
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filtrar
@@ -65,7 +76,7 @@
 <div id="contenedor">
 
   <div class="row">
-    <div id="foto-ciudad" class="col-md-12"> <img src="city2-2.jpg" alt="ciudad" /> </div>
+    <div id="foto-ciudad" class="col-md-12"> <img src="img/city2-2.jpg" alt="ciudad" /> </div>
   </div>
   
 
@@ -107,11 +118,11 @@
           </div>
 
           <div class="col-md-4" id="datos_secundarios">
-            <label for="">Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
+            <img src="img/humedad2.jpg" class="icon-black" /><label for="">Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
             <br/>
-            <label for="">Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
+            <img src="img/presion.jpg" class="icon-black"  /><label for="">Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
             <br/>
-            <label for="">Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span>
+            <img src="img/viento.jpg" class="icon-black" /><label for="">Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span>
           </div>  
       </div>
 
