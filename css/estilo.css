@@ -53,16 +53,19 @@ body{
 }
 
 #recuadro{
-  border:2px solid #BDBDBD;
+  /*border:2px solid #BDBDBD;*/
   background: #FFFFFF;
   position:absolute;
   margin-top: 30%;
   z-index: 3;
+  padding-left: 1%;
+  padding-right: 1%; 
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 
 #botones{
-  margin-top: 140%;
+  margin-top: 100%;
   position: absolute;
   z-index: 2;
   margin-left: 0px;
@@ -72,7 +75,6 @@ body{
 
 
 #foto-ciudad{
-  border: 2px solid red;
   position: absolute;
   z-index: 1; 
 }
@@ -80,8 +82,9 @@ body{
 
 
 #map_canvas{
-  margin-top:15px;
-  margin-bottom: 15px;
+  margin-top:1%;
+  margin-bottom: 2%;
+  height:200px;
 }
 
 /*
@@ -113,6 +116,7 @@ body{
 #currently-temperature{
   font-size: 50px !important;
   font-weight: bold;
+  font-family: fantasy,helvetic, arial, romana;
 }
 
 #ubicacion{
@@ -149,16 +153,24 @@ body{
 }
 
 #centro{
+  padding: 0px;
+}
+
+.black-icon{
+  width: 15px;
+}
+
+#wind-icon{
+  width: 20px;
+}
+
+#principal-info{
   padding-left: 0px;
 }
 
-.icon-black{
-  max-width: 15px;
+#secundary-info{
+  padding-left: 0px;
 }
-
-
-
-
 
 
 

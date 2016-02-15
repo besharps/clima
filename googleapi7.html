@@ -12,10 +12,8 @@
 
 
 <!-- API que muestra la ubicación en un mapa y The Google Places Autocomplete API  -->  
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs9IPWFNn4LAOx8oRZ-SixSs84F8Hnk7Q&signed_in=true&libraries=places&language=es"
+<script src="https://maps.googleapis.com/maps/api/js?key=&signed_in=true&libraries=places&language=es"
         async defer></script>  
-
-
 
 
 <!-- Biblioteca de funciones-->
@@ -97,7 +95,7 @@
   <div id="centro" class="col-md-7 left">
 
     <div id="recuadro">
-      <div id='map_canvas' style=" height:200px;"></div>
+      <div id='map_canvas' ></div>
 
 
       <div id="actual" class="row">
@@ -110,19 +108,19 @@
             </div>
           </div>
           
-          <div class="col-md-5">
+          <div id="principal-info" class="col-md-5">
             <p id="currently-location"></p>
             <p id="currently-temperature"></p>
             <p id="currently-summary"></p>        
             <label for="">ST: &nbsp; </label><span id="currently-apparentTemperature"></span>
           </div>
 
-          <div class="col-md-4" id="datos_secundarios">
-            <img src="img/humedad2.jpg" class="icon-black" /><label for="">Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
+          <div class="col-md-4" id="secundary-info">
+            <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
             <br/>
-            <img src="img/presion.jpg" class="icon-black"  /><label for="">Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
+            <img src="img/presion.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
             <br/>
-            <img src="img/viento.jpg" class="icon-black" /><label for="">Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span>
+            <img src="img/viento.jpg" id="wind-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span>
           </div>  
       </div>
 
@@ -130,9 +128,7 @@
       </div>
 
       <br/>
-      <br/>
-      <br/>
-      <br/>
+  
     </div>
   </div>
 
