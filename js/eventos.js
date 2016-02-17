@@ -64,21 +64,32 @@ $(document).ready(function() {
 
 
 
-    //pronóstico actual    
-    $("#btn_pr_actual").click(function(){
+    //pronóstico extendido por hora    
+    //$("#btn_pr_extend_hour").click(function(){
 
-        $("#info_extend").hide();
-        $("#info_currently").show();  
+        //$("#info_extend").hide();
+        //$("#info_currently").show();
+        $("#btn_pr_extend_hour").toggle(
+          function() {
+            $(this).addClass( "selected" );
+            alert("funciona!!");
+          }, function() {
+            $(this).removeClass( "selected" );
+          }
+        );
 
-    });
+   // });
 
-    //pronóstico extendido    
+    //pronóstico extendido por día   
     $("#btn_pr_extend").click(function(){
 
-        $("#info_currently").hide();
-        $("#info_extend").show();  
+        $("#info_extend").fadeToggle( "fast", "linear" );
 
     });
+
+
+    $('.bxslider').bxSlider();
+    
 
 });
 

@@ -1,5 +1,8 @@
 body{
-   background: #E6E6E6 !important;
+  /*background: #E6E6E6 !important;*/
+  background-image: url('../img/snowflakes.png');
+  /*background-size: cover;
+  height:100vh;*/
 }
 
 
@@ -25,7 +28,8 @@ body{
 }
 
 #address:focus {
-  border-color: #4d90fe;
+  /*border-color: #4d90fe;*/
+  border-color: #B404AE;
 }
 
 .address-container {
@@ -47,9 +51,11 @@ body{
 #logo{
   color: white;
   font-weight: bold;
+  font-size: 40px;
   position:absolute;
   z-index: 2;
-  margin-top: 80%;
+  margin-top: 55%;
+  margin-left: 8%;
 }
 
 #recuadro{
@@ -65,7 +71,7 @@ body{
 
 
 #botones{
-  margin-top: 100%;
+  margin-top: 115%;
   position: absolute;
   z-index: 2;
   margin-left: 0px;
@@ -77,6 +83,13 @@ body{
 #foto-ciudad{
   position: absolute;
   z-index: 1; 
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+  height: 25000% !important;
+  background: url("../img/city2.jpg") no-repeat center center fixed;
+  -webkit-background-size : cover ; 
+  -moz-background-size : cover ; 
+  -o-background-size : cover ; 
+  background-size : cover ; 
 }
 
 
@@ -97,21 +110,19 @@ body{
   height: 750px;
 }
 
-.btn_izq{
+/*.btn_izq{
   font-style: Roboto;
   font-size: 20px;
   font-family: Roboto;
   border:none !important;
-  background: #E6E6E6;
+  background: none;
   width: 250px;
   text-align: left;
-}
+}*/
 
-.btn_izq:hover{
-  font-weight: bold;
-  background: gray;
+#btn_pr_extend,#btn_pr_actual{
+  background: none;
 }
-
 
 #currently-temperature{
   font-size: 50px !important;
@@ -172,6 +183,21 @@ body{
   padding-left: 0px;
 }
 
+#pr_ext{
+  font-size: 17px;
+}
+
+#btn_filtrar{
+  color:#B404AE !important;
+}
+
+#pie{
+  color: #B404AE;
+}
+
+.selected{
+  border:1px solid #B404AE !important;
+}
 
 
 /* No funciona porque el html al que hace referencia no está en mi dominio */

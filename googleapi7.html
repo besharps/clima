@@ -10,16 +10,12 @@
 <!-- API que devuelve latitud y longitus de una ubicación-->
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>	
 
-
 <!-- API que muestra la ubicación en un mapa y The Google Places Autocomplete API  -->  
-<script src="https://maps.googleapis.com/maps/api/js?key=&signed_in=true&libraries=places&language=es"
-        async defer></script>  
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs9IPWFNn4LAOx8oRZ-SixSs84F8Hnk7Q&signed_in=true&libraries=places&language=es" async defer></script>  
 
 <!-- Biblioteca de funciones-->
 <script src="js/biblioteca.js"></script>    
 <script src="js/eventos.js"></script>    
-
 
 <!-- Material Design fonts -->
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
@@ -47,6 +43,12 @@
 <!-- iconos del clima, Skycons de forecast -->
 <script src="js/skycons.js"></script>
 
+
+<!-- bxSlider Javascript file -->
+<script src="js/jquery.bxslider/jquery.bxslider.min.js"></script>
+<!-- bxSlider CSS file -->
+<link href="js/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -58,7 +60,7 @@
 
 
     <div class="dropdown" id="type-selector">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filtrar
+      <button id="btn_filtrar" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filtrar
       <span class="caret"></span></button>
       <ul class="dropdown-menu">
         <li><input type="radio" name="type" id="changetype-all" checked="checked"/>Todo</li>
@@ -73,22 +75,25 @@
 
 <div id="contenedor">
 
-  <div class="row">
-    <div id="foto-ciudad" class="col-md-12"> <img src="img/city2-2.jpg" alt="ciudad" /> </div>
+  <div class="col-md-12">
+    <div class="row">
+      <div id="foto-ciudad" class="col-md-12"> 
+        <!--<img src="img/city2-2.jpg" alt="ciudad" /> -->
+      </div>
+    </div>
   </div>
-  
 
   <!-- columna izquierda -->
   <div class="col-md-3 left" id="izquierda">
 
     <h2 id="logo">B# Weather</h2>
 
-      <div id="botones">
-        <button id="btn_pr_actual" class="btn_izq">Estado Actual</button>
-        <br/>
-        <button id="btn_pr_extend" class="btn_izq">Pronóstico Extendido</button>
-     </div> 
-      
+    <div id="botones" class="btn-group-vertical">
+      <span id="pr_ext" ><b>PRONÓSTICO EXTENDIDO</b></span>
+      <a  id="btn_pr_extend" href="javascript:void(0)" class="btn btn-raised">Por día</a>
+      <a  id="btn_pr_actual" href="javascript:void(0)" class="btn btn-raised">Por hora</a>
+    </div>
+
   </div>
 
   <!-- columna central -->
@@ -133,9 +138,24 @@
   </div>
 
   <!-- tercer columna  -->
-  <div class="col-md-2 left" id="derecha">Derecha!!</div>
+  <div class="col-md-2 left" id="derecha"></div>
 
   <br/>
+  <br/>
+  <br/>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="bxslider">
+      <li><img src="img/gotas05.gif" /></li>
+      <li><img src="img/humedad.jpg" /></li>
+      <li><img src="img/snowflakes.png" /></li>
+      <li><img src="img/snowflakes4.png" /></li>
+    </ul>
+    </div>
+  </div>
+
   <br/>
   <br/>
 
@@ -317,8 +337,8 @@
 <br>
 
 <div class="row">
-  <div class="col-md-12">
-    <center>  Desarrollado por - BeSharps -  B#  - </center>
+  <div  id="pie" class="col-md-12">
+    <center><b>  Desarrollado por - BeSharps -  B#  - </b></center>
   </div> 
 </div>
 
@@ -332,7 +352,6 @@ var address = $('#address').val("");
 
 
 });
-
 
 </script>
 
