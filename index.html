@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>B# Weather</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- Mobile support -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Material Design fonts -->
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	
+	<!-- Bootstrap Material Design -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.8/css/bootstrap-material-design.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.8/css/ripples.min.css">
+
+	<!-- Dropdown.js -->
+	<link href="https://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css" rel="stylesheet">
+
+	<!-- Page style -->
+	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="css/estilo.css">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+	<!-- Twitter Bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<!-- Material Design for Bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.8/js/material.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.8/js/ripples.min.js"></script>
+
+	<!-- API que muestra la ubicación en un mapa y The Google Places Autocomplete API  -->  
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs9IPWFNn4LAOx8oRZ-SixSs84F8Hnk7Q&signed_in=true&libraries=places&language=es" async defer></script>
+
+	<!-- Biblioteca de funciones -->
+	<script src="js/biblioteca.js"></script>
+	<script src="js/eventos.js"></script>
+
+	<!-- iconos del clima, Skycons de forecast -->
+	<script src="js/skycons.js"></script>
+
+</head>
+<body>
+
+<div class="header-panel shadow-z-2">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-3">
+				<h1>B# Weather</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid main">
+	<div class="row">
+		<nav class="col-xs-3 menu">
+			<ul>
+				<li class="active withripple" data-target="#actual">Estado Actual</li>
+				<li class="withripple" data-target="#extendido">Pronóstico Extendido</li>
+			</ul>
+		</nav>
+		<div class="pages col-xs-9">
+			<div class="row">
+				<div class="col-xs-10">
+					<div class="well page active" id="actual">
+						
+						<p><div id="map_canvas"></div></p>
+
+						<div class="row">				
+						 
+							<input placeholder="Ingrese una ubicación" maxlength="100" class="form-control controls" id="address" type="text">
+
+
+							<div class="dropdown" id="type-selector">
+							  <button id="btn_filtrar" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filtrar
+							  <span class="caret"></span></button>
+							  <ul class="dropdown-menu">
+								<li><input type="radio" name="type" id="changetype-all" checked="checked"/>Todo</li>
+								<li><input type="radio" name="type" id="changetype-establishment">Establecimientos</li>
+								<li><input type="radio" name="type" id="changetype-address">Direcciones</li>
+								<li><input type="radio" name="type" id="changetype-geocode">Geo-códigos</li>
+							  </ul>
+							</div>
+
+						</div>
+						
+						
+						
+						
+						<div class="row">
+
+							<div id="info_currently">
+								<div class="col-md-3 text-center">
+									<div id="icono">
+										<canvas id="currently-icon" width="100" height="100"></canvas>
+									</div> 
+								</div>
+						  	</div>
+							  
+							<div id="principal-info" class="col-md-5">
+								<p id="currently-location"></p>
+								<p id="currently-temperature"></p>
+								<p id="currently-summary"></p>        
+								<label for="">ST: &nbsp; </label><span id="currently-apparentTemperature"></span>
+							</div>
+
+							<div class="col-md-4" id="secundary-info">
+								<img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
+								<br/>
+								<img src="img/presion.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
+								<br/>
+								<img src="img/viento.jpg" id="wind-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span>
+							</div>  
+						</div>
+					</div>
+
+					<div class="well page" id="extendido">
+						<h1 class="header">Pronóstico Extendido</h1>
+						<p>Sandunga dunga</p>
+
+					</div>
+
+				</div>
+				<!-- <div class="col-xs-2">
+					<button type="button" class="btn btn-fab btn-material-grey-200 opensource">
+						<i class="mdi-action-open-in-new"></i>
+					</button>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+<!-- Open source code -->
+<script>
+	window.page = window.location.hash || "#about";
+
+	$(document).ready(function () {
+		if (window.page != "#about") {
+			$(".menu").find("li[data-target=" + window.page + "]").trigger("click");
+		}
+	});
+
+	$(window).on("resize", function () {
+		$("html, body").height($(window).height());
+		$(".main, .menu").height($(window).height() - $(".header-panel").outerHeight());
+		$(".pages").height($(window).height());
+	}).trigger("resize");
+
+	$(".menu li").click(function () {
+		// Menu
+		if (!$(this).data("target")) return;
+		if ($(this).is(".active")) return;
+		$(".menu li").not($(this)).removeClass("active");
+		$(".page").not(page).removeClass("active").hide();
+		window.page = $(this).data("target");
+		var page = $(window.page);
+		window.location.hash = window.page;
+		$(this).addClass("active");
+
+
+		page.show();
+
+		var totop = setInterval(function () {
+			$(".pages").animate({scrollTop: 0}, 0);
+		}, 1);
+
+		setTimeout(function () {
+			page.addClass("active");
+			setTimeout(function () {
+				clearInterval(totop);
+			}, 1000);
+		}, 100);
+	});
+
+	function cleanSource(html) {
+		var lines = html.split(/\n/);
+
+		lines.shift();
+		lines.splice(-1, 1);
+
+		var indentSize = lines[0].length - lines[0].trim().length,
+				re = new RegExp(" {" + indentSize + "}");
+
+		lines = lines.map(function (line) {
+			if (line.match(re)) {
+				line = line.substring(indentSize);
+			}
+
+			return line;
+		});
+
+		lines = lines.join("\n");
+
+		return lines;
+	}
+
+	$("#opensource").click(function () {
+		$.get(window.location.href, function (data) {
+			var html = $(data).find(window.page).html();
+			html = cleanSource(html);
+			$("#source-modal pre").text(html);
+			$("#source-modal").modal();
+		});
+	});
+</script>
+
+
+
+
+<script>
+	$.material.init();
+
+	$(document).ready(function(){
+	var address = $("#address").val("");
+	});
+
+</script>
+
+
+
+<!-- Sliders -->
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+<script>
+	$(function () {
+		$.material.init();
+		$(".shor").noUiSlider({
+			start: 40,
+			connect: "lower",
+			range: {
+				min: 0,
+				max: 100
+			}
+		});
+
+		$(".svert").noUiSlider({
+			orientation: "vertical",
+			start: 40,
+			connect: "lower",
+			range: {
+				min: 0,
+				max: 100
+			}
+		});
+	});
+</script> -->
+
+<!-- Dropdown.js -->
+<script src="https://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.js"></script>
+<script>
+	$("#dropdown-menu select").dropdown();
+</script>
+
+</body>
+</html>
