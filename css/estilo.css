@@ -14,15 +14,17 @@ body{
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 */
-/*#address {
+#address {
+	/*background-color: white;*/
+	color: #222222;
 	font-family: Roboto;
 	font-size: 15px;
-	font-weight: 300;
-	margin-left: 12px;
+	/*font-weight: 300;*/
+	/*margin-left: 12px;*/
 	padding: 0 11px 0 13px;
 	text-overflow: ellipsis;
-	width: 300px;
-}*/
+	/*width: 300px;*/
+}
 
 /*#address:focus {
 	border-color: #4d90fe;
@@ -137,8 +139,8 @@ body{
 }
 
 #icono, .icono-clima{
-	color: black;
-	background-color: #DEDEDE !important;
+	/*color: black;*/
+	/*background-color: #DEDEDE !important;*/
 }
 
 .icon{
@@ -185,17 +187,17 @@ body{
 	font-size: 17px;
 }
 
-#btn_filtrar{
+/*#btn_filtrar{
 	color:#B404AE !important;
-}
+}*/
 
 #pie{
 	color: #B404AE;
 }
 
-.selected{
+/*.selected{
 	border:1px solid #B404AE !important;
-}
+}*/
 
 
 /* No funciona porque el html al que hace referencia no está en mi dominio */

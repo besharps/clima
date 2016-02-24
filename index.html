@@ -43,8 +43,9 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs9IPWFNn4LAOx8oRZ-SixSs84F8Hnk7Q&signed_in=true&libraries=places&language=es" async defer></script>
 
 	<!-- Biblioteca de funciones -->
-	<script src="js/biblioteca.js"></script>
 	<script src="js/eventos.js"></script>
+	<script src="js/biblioteca.js"></script>
+	
 
 	<!-- iconos del clima, Skycons de forecast -->
 	<script src="js/skycons.js"></script>
@@ -74,18 +75,19 @@
 				<div class="col-xs-10">
 					<div class="well page active" id="actual">
 						
-						<p><div id="map_canvas"></div></p>
+						<div id="map_canvas"></div>
 
-						<div class="row">				
-						 
-							<input placeholder="Ingrese una ubicación" maxlength="100" class="form-control controls" id="address" type="text">
+						<div class="form-group label-floating hidden" id="addressInput">				
+							<label class="control-label" for="address">Ingrese su ubicación actual...</label>
+							<input class="form-control" id="address" type="text" placeholder="" maxlength="100">
+							<p class="help-block">Puede ingresar su dirección, ciudad o provincia.</p>
 
 
 							<div class="dropdown" id="type-selector">
-							  <button id="btn_filtrar" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filtrar
+							  <button id="btn_filtrar" class="btn btn-primary dropdown-toggle hidden" type="button" data-toggle="dropdown">Filtrar
 							  <span class="caret"></span></button>
 							  <ul class="dropdown-menu">
-								<li><input type="radio" name="type" id="changetype-all" checked="checked"/>Todo</li>
+								<li><input type="radio" name="type" id="changetype-all" checked/>Todo</li>
 								<li><input type="radio" name="type" id="changetype-establishment">Establecimientos</li>
 								<li><input type="radio" name="type" id="changetype-address">Direcciones</li>
 								<li><input type="radio" name="type" id="changetype-geocode">Geo-códigos</li>
@@ -94,7 +96,7 @@
 
 						</div>
 						
-						
+						<p id="currently-location"></p>
 						
 						
 						<div class="row">
@@ -108,7 +110,7 @@
 						  	</div>
 							  
 							<div id="principal-info" class="col-md-5">
-								<p id="currently-location"></p>
+								<!-- <p id="currently-location"></p> -->
 								<p id="currently-temperature"></p>
 								<p id="currently-summary"></p>        
 								<label for="">ST: &nbsp; </label><span id="currently-apparentTemperature"></span>
