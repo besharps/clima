@@ -67,9 +67,7 @@ $(document).ready(function() {
     //pronóstico extendido por hora    
     //$("#btn_pr_extend_hour").click(function(){
 
-        //$("#info_extend").hide();
-        //$("#info_currently").show();
-        $("#btn_pr_extend_hour").toggle(
+      /*  $("#btn_pr_extend_hour").toggle(
           function() {
             $(this).addClass( "selected" );
             alert("funciona!!");
@@ -78,7 +76,7 @@ $(document).ready(function() {
           }
         );
 
-   // });
+    });*/
 
     //pronóstico extendido por día   
     $("#btn_pr_extend").click(function(){
@@ -87,9 +85,6 @@ $(document).ready(function() {
 
     });
 
-
-    $('.bxslider').bxSlider();
-    
 
 });
 

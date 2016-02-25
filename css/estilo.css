@@ -1,10 +1,7 @@
 body{
   /*background: #E6E6E6 !important;*/
   background-image: url('../img/snowflakes.png');
-  /*background-size: cover;
-  height:100vh;*/
 }
-
 
 .controls {
   margin-top: 10px;
@@ -28,7 +25,6 @@ body{
 }
 
 #address:focus {
-  /*border-color: #4d90fe;*/
   border-color: #B404AE;
 }
 
@@ -47,7 +43,6 @@ body{
   font-weight: 300;
 }
 
-
 #logo{
   color: white;
   font-weight: bold;
@@ -59,7 +54,6 @@ body{
 }
 
 #recuadro{
-  /*border:2px solid #BDBDBD;*/
   background: #FFFFFF;
   position:absolute;
   margin-top: 30%;
@@ -69,7 +63,6 @@ body{
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
-
 #botones{
   margin-top: 115%;
   position: absolute;
@@ -78,7 +71,6 @@ body{
   float: left;
   width: 260px;
 }
-
 
 #foto-ciudad{
   position: absolute;
@@ -92,18 +84,11 @@ body{
   background-size : cover ; 
 }
 
-
-
 #map_canvas{
   margin-top:1%;
   margin-bottom: 2%;
   height:200px;
 }
-
-/*
-#imagen{
-  width: 100px;
-}*/
 
 #izquierda{
   padding-left: 0px;
@@ -141,6 +126,7 @@ body{
 
 #icono, .icono-clima{
   background-color: #B404AE !important;
+  margin-left: 6%;
 }
 
 .icon{
@@ -168,11 +154,18 @@ body{
 }
 
 .black-icon{
-  width: 15px;
+  width: 25px;
+  margin: 0px;
 }
 
-#wind-icon{
-  width: 20px;
+.black-icon2{
+  width: 15px;
+  margin: 0px;
+}
+
+.sign{
+  font-size: 20px;
+  font-weight: bold;
 }
 
 #principal-info{
@@ -200,11 +193,41 @@ body{
 }
 
 
+.recuadro2{
+  background: white;
+  width: 700px;
+  height: 210px;
+  /*border:2px solid green;*/
+  /*margin-left: 6%;*/
+  padding-right: 3%;
+  /*padding-left: 6%;*/
+  margin-bottom: 7%;
+  margin-top: 7%;
+}
+
+.subtitulo2{
+  text-align: center;
+  font-weight: bold;
+  color:#B404AE; 
+}
+
+.sldr-panel-der{
+  padding-right: 0px;
+  margin-left: 0px;
+}
+
+.carousel-indicators li{
+  /*color: yellow !important;*/
+  border: 1px solid #B404AE;
+}
+
+.carousel-indicators .active{
+  background: #B404AE;
+}
+
 /* No funciona porque el html al que hace referencia no está en mi dominio */
 /*div.login-control{
   display:none !important;
 }*/
-
-
 
 

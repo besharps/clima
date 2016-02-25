@@ -95,7 +95,7 @@ function load_map(lat,lon) {
       setupClickListener('changetype-all', []);
       setupClickListener('changetype-address', ['address']);
       setupClickListener('changetype-establishment', ['establishment']);
-     // setupClickListener('changetype-geocode', ['geocode']);
+      setupClickListener('changetype-geocode', ['geocode']);
     
 }// Fin de la funcion load map
 
@@ -129,7 +129,7 @@ function mostrarClima(latitud,longitud){
         $("#currently-pressure").html(Math.round(clima.currently.pressure) + " hPa");
         skycons.add("currently-icon", clima.currently.icon);       
 
-        //Datos del pronóstico extendido
+        //Datos del pronóstico extendido semanal
 
         //General summary
         $("#daily-general-summary").html(clima.daily.summary);
