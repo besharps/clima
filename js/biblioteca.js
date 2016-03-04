@@ -236,6 +236,59 @@ function mostrarClima(latitud,longitud){
         $("#daily-pressure7").html(Math.round(clima.daily.data[7].pressure) + " hPa");
         skycons.add("icon7", clima.daily.data[7].icon);
 
+
+
+
+        //pronóstico extendido por hora
+
+        $("#hourly-general-summary").html(clima.hourly.summary);
+
+
+        for (var i=0; i<24; i++) {
+
+            if(i==0){
+                $("#hourly-summary0").html(clima.hourly.data[0].summary);
+                $("#hourly-temperature0").html(redondear(clima.hourly.data[0].temperature) + " ºC");
+                $("#hourly-apparentTemperature0").html(redondear(clima.hourly.data[0].apparentTemperature) + " ºC");
+                $("#hourly-precipProbability0").html(Math.round(clima.hourly.data[0].precipProbability*100) +" %");
+                $("#hourly-windSpeed0").html(redondear(clima.hourly.data[0].windSpeed) + " km/h");
+                $("#hourly-windBearing0").html(orientacion(clima.hourly.data[0].windBearing));
+                $("#hourly-humidity0").html(Math.round(clima.hourly.data[0].humidity*100) +" %");
+                $("#hourly-pressure0").html(Math.round(clima.hourly.data[0].pressure) + " hPa");
+                skycons.add("icon-hour0", clima.hourly.data[0].icon);
+            }
+                
+            //Creo dinamicamente los elementos necesarios y sus hijos para mostrar la info
+            
+            else{
+                var listItem="<li data-target=\"#myCarousel\" data-slide-to="+i+"></li>";
+                $("#listaOrdenada").append(listItem);
+
+                var horario=i+":00 hs";
+
+                var prueba="<div class=\"item\"><center><div class=\"recuadro2\"><h4 id="+"hour"+i+" class=\"subtitulo2\" ></h4><div class=\"text-left\"><label>&nbsp; Resumen: &nbsp;</label><span id="+"hourly-summary"+i+"></span> <br/></div><div class=\"row\"><div class=\"col-md-3 text-center\"><div class=\"icono-clima\"><canvas id="+"icon-hour"+i+" class=\"icon\"></canvas></div></div><div class=\"col-md-4 text-left\" ><img src=\"img/tempmin.jpg\" class=\"black-icon2\" />&nbsp;<label>&nbsp; Temperatura: &nbsp;</label><span id="+"hourly-temperature"+i+"></span><br/><span class=\"sign\">+-</span><label>&nbsp; ST: &nbsp;</label><span id="+"hourly-apparentTemperature"+i+"></span><br/><span class=\"sign\">+</span><label>&nbsp; Prob. Lluvias: &nbsp;</label><span id="+"hourly-precipProbability"+i+"></span><br/></div><div class=\"col-md-5 sldr-panel-der text-left\" ><img src=\"img/humedad.jpg\" class=\"black-icon\"/>&nbsp;<label>Humedad: &nbsp;</label><span id="+"hourly-humidity"+i+"></span><br/><img src=\"img/presion2.jpg\" class=\"black-icon\"/><label>&nbsp; Presión: &nbsp;</label><span id="+"hourly-pressure"+i+"></span><br/><img src=\"img/viento.jpg\" class=\"black-icon\"/><label>&nbsp;Viento:&nbsp;</label><span id="+"hourly-windSpeed"+i+"></span>&nbsp;<span id="+"hourly-windBearing"+i+"></span><br/></div></div></div></center></div>";
+                $("#info-hour").append(prueba);
+
+                $("#hour"+i).html(horario);
+                $("#hourly-summary"+i).html(clima.hourly.data[i].summary);
+                $("#hourly-temperature"+i).html(redondear(clima.hourly.data[i].temperature) + " ºC");
+                $("#hourly-apparentTemperature"+i).html(redondear(clima.hourly.data[i].apparentTemperature) + " ºC");
+                $("#hourly-precipProbability"+i).html(Math.round(clima.hourly.data[i].precipProbability*100) +" %");
+                $("#hourly-windSpeed"+i).html(redondear(clima.hourly.data[i].windSpeed) + " km/h");
+                $("#hourly-windBearing"+i).html(orientacion(clima.hourly.data[i].windBearing));
+                $("#hourly-humidity"+i).html(Math.round(clima.hourly.data[i].humidity*100) +" %");
+                $("#hourly-pressure"+i).html(Math.round(clima.hourly.data[i].pressure) + " hPa");
+                skycons.add("icon-hour"+i, clima.hourly.data[i].icon);
+            }
+               
+        }    
+
+        var controles="<a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\"><span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span><span class=\"sr-only\">Previous</span></a><a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\"><span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span><span class=\"sr-only\">Next</span></a>";
+
+        $("#info-hour").append(controles);
+
+
+
         //Animación para los iconos del clima
         skycons.play();
 

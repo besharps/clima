@@ -526,9 +526,94 @@
 </div>
 
 <!-- Pronóstico extendido por hora -->
+
 <div id="info_extend_hour">
-    
-</div>
+  <center>
+  <div id="titulo2">
+    <div class="row">
+      <div class="col-md-12">
+        <h2><b> Pronóstico Del Día Hora por Hora</b> </h2>
+      </div>
+    </div>
+
+    <br/>
+    <h3>Resumen general</h3><b><p id="hourly-general-summary"></p></b>
+  </div>
+  </center>
+
+  <br/>
+
+  <!-- SLIDER -->
+
+  <br/>
+  <br/>
+
+  <div class="container">
+    <br>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol id="listaOrdenada" class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+       <!-- <li data-target="#myCarousel" data-slide-to="1"></li>  Tambien agregar dinamicamente -->
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div id="info-hour" class="carousel-inner" role="listbox">
+        <div class="item active">
+          <center>
+          <div class="recuadro2">
+            <h4 class="subtitulo2" >0:00 hs</h4>
+            <div class="text-left">
+              <label for="">&nbsp; Resumen: &nbsp;</label><span id="hourly-summary0"></span> <br/>
+            </div>
+
+            <div class="row">  
+              <div class="col-md-3 text-center">
+                <div class="icono-clima">
+                  <canvas id="icon-hour0" class="icon"></canvas>  
+                </div>
+              </div>
+
+              <div class="col-md-4 text-left" >
+                <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
+                <label for="">&nbsp; Temperatura: &nbsp;</label><span id="hourly-temperature0"></span> <br/>
+                
+                <span class="sign">+-</span>
+                <label for="">&nbsp; ST: &nbsp;</label><span id="hourly-apparentTemperature0"></span> <br/>
+                
+                <span class="sign">!!</span>
+                <label for="">&nbsp; Prob. Lluvias: &nbsp; </label><span id="hourly-precipProbability0"></span> <br/>
+              </div> 
+
+              <div class="col-md-5 sldr-panel-der text-left" >
+                <img src="img/humedad.jpg" class="black-icon" />&nbsp;<label for="">Humedad: &nbsp;</label><span id="hourly-humidity0"></span>
+                <br/>
+                <img src="img/presion2.jpg" class="black-icon" /><label for="">&nbsp; Presión: &nbsp; </label><span id="hourly-pressure0"></span>
+                <br/>
+                <img src="img/viento.jpg" class="black-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="hourly-windSpeed0"></span>&nbsp;<span id="hourly-windBearing0"></span>
+                <br/>
+              </div>  
+            </div> <!-- class row -->
+          </div> <!-- class recuadro2 -->
+          </center>
+        </div> <!-- class item active -->
+
+
+        <!-- Left and right controls 
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+        -->
+
+      </div> <!-- role listbox -->
+    </div> <!-- id myCarousel -->
+  </div>  <!-- container -->
 
 
 <br>
