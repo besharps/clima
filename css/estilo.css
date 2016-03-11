@@ -1,6 +1,6 @@
 body{
-  /*background: #E6E6E6 !important;*/
-  background-image: url('../img/snowflakes.png');
+  background: linear-gradient(0deg,#4c4c4c,#bab5b5);
+  /*background-image: url('../img/gotas05.gif');*/
 }
 
 .controls {
@@ -44,13 +44,10 @@ body{
 }
 
 #logo{
-  color: white;
-  font-weight: bold;
-  font-size: 40px;
   position:absolute;
   z-index: 2;
   margin-top: 55%;
-  margin-left: 8%;
+  margin-left: 3%;
 }
 
 #recuadro{
@@ -95,17 +92,7 @@ body{
   height: 750px;
 }
 
-/*.btn_izq{
-  font-style: Roboto;
-  font-size: 20px;
-  font-family: Roboto;
-  border:none !important;
-  background: none;
-  width: 250px;
-  text-align: left;
-}*/
-
-#btn_pr_extend,#btn_pr_actual{
+#btn_pr_extend,#btn_pr_extend_hour{
   background: none;
 }
 
@@ -120,8 +107,9 @@ body{
 }
 
 
-#info_extend{
+#info_extend,#info_extend_hour{
   display: none;
+  margin-bottom: 0px;
 }
 
 #icono, .icono-clima{
@@ -135,11 +123,9 @@ body{
   text-align: center;
 }
 
-
 #contenedor{
   position:relative;
 }
-
 
 .lef{
   float: left;
@@ -160,6 +146,11 @@ body{
 
 .black-icon2{
   width: 15px;
+  margin: 0px;
+}
+
+.black-icon3{
+  width: 30px;
   margin: 0px;
 }
 
@@ -185,22 +176,19 @@ body{
 }
 
 #pie{
-  color: #B404AE;
+  color: #FFFFFF;
+  margin-bottom: 0px;
 }
 
 .selected{
   border:1px solid #B404AE !important;
 }
 
-
 .recuadro2{
   background: white;
   width: 700px;
   height: 210px;
-  /*border:2px solid green;*/
-  /*margin-left: 6%;*/
   padding-right: 3%;
-  /*padding-left: 6%;*/
   margin-bottom: 7%;
   margin-top: 7%;
 }
@@ -217,7 +205,6 @@ body{
 }
 
 .carousel-indicators li{
-  /*color: yellow !important;*/
   border: 1px solid #B404AE;
 }
 
@@ -225,9 +212,12 @@ body{
   background: #B404AE;
 }
 
+
+#logo-besharps{
+  width: 100px;
+}
+
 /* No funciona porque el html al que hace referencia no está en mi dominio */
 /*div.login-control{
   display:none !important;
 }*/
-
-

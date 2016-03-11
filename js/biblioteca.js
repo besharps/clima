@@ -126,6 +126,7 @@ function mostrarClima(latitud,longitud){
         $("#currently-windSpeed").html(redondear(clima.currently.windSpeed) + " km/h");
         $("#currently-windBearing").html(orientacion(clima.currently.windBearing));
         $("#currently-humidity").html(Math.round(clima.currently.humidity*100) +" %");
+        $("#currently-precipProbability").html(Math.round(clima.currently.precipProbability*100) +" %");
         $("#currently-pressure").html(Math.round(clima.currently.pressure) + " hPa");
         skycons.add("currently-icon", clima.currently.icon);       
 
@@ -142,6 +143,7 @@ function mostrarClima(latitud,longitud){
         $("#daily-windSpeed").html(redondear(clima.daily.data[0].windSpeed) + " km/h");
         $("#daily-windBearing").html(orientacion(clima.daily.data[0].windBearing));
         $("#daily-humidity").html(Math.round(clima.daily.data[0].humidity*100) +" %");
+        $("#daily-precipProbability").html(Math.round(clima.daily.data[0].precipProbability*100) +" %");
         $("#daily-pressure").html(Math.round(clima.daily.data[0].pressure) + " hPa");
         skycons.add("icon", clima.daily.data[0].icon);
 
@@ -155,6 +157,7 @@ function mostrarClima(latitud,longitud){
         $("#daily-windSpeed1").html(redondear(clima.daily.data[1].windSpeed) + " km/h");
         $("#daily-windBearing1").html(orientacion(clima.daily.data[1].windBearing));
         $("#daily-humidity1").html(Math.round(clima.daily.data[1].humidity*100) +" %");
+        $("#daily-precipProbability").html(Math.round(clima.daily.data[1].precipProbability*100) +" %");
         $("#daily-pressure1").html(Math.round(clima.daily.data[1].pressure) + " hPa");
         skycons.add("icon1", clima.daily.data[1].icon);
 
@@ -168,6 +171,7 @@ function mostrarClima(latitud,longitud){
         $("#daily-windSpeed2").html(redondear(clima.daily.data[2].windSpeed) + " km/h");
         $("#daily-windBearing2").html(orientacion(clima.daily.data[2].windBearing));
         $("#daily-humidity2").html(Math.round(clima.daily.data[2].humidity*100) +" %");
+        $("#daily-precipProbability").html(Math.round(clima.daily.data[2].precipProbability*100) +" %");
         $("#daily-pressure2").html(Math.round(clima.daily.data[2].pressure) + " hPa");
         skycons.add("icon2", clima.daily.data[2].icon);
 
@@ -181,6 +185,7 @@ function mostrarClima(latitud,longitud){
         $("#daily-windSpeed3").html(redondear(clima.daily.data[3].windSpeed) + " km/h");
         $("#daily-windBearing3").html(orientacion(clima.daily.data[3].windBearing));
         $("#daily-humidity3").html(Math.round(clima.daily.data[3].humidity*100) +" %");
+        $("#daily-precipProbability").html(Math.round(clima.daily.data[3].precipProbability*100) +" %");
         $("#daily-pressure3").html(Math.round(clima.daily.data[3].pressure) + " hPa");
         skycons.add("icon3", clima.daily.data[3].icon);
 
@@ -194,6 +199,7 @@ function mostrarClima(latitud,longitud){
         $("#daily-windSpeed4").html(redondear(clima.daily.data[4].windSpeed) + " km/h");
         $("#daily-windBearing4").html(orientacion(clima.daily.data[4].windBearing));
         $("#daily-humidity4").html(Math.round(clima.daily.data[4].humidity*100) +" %");
+        $("#daily-precipProbability").html(Math.round(clima.daily.data[4].precipProbability*100) +" %");
         $("#daily-pressure4").html(Math.round(clima.daily.data[4].pressure) + " hPa");
         skycons.add("icon4", clima.daily.data[4].icon);
 
@@ -207,6 +213,7 @@ function mostrarClima(latitud,longitud){
         $("#daily-windSpeed5").html(redondear(clima.daily.data[5].windSpeed) + " km/h");
         $("#daily-windBearing5").html(orientacion(clima.daily.data[5].windBearing));
         $("#daily-humidity5").html(Math.round(clima.daily.data[5].humidity*100) +" %");
+        $("#daily-precipProbability").html(Math.round(clima.daily.data[5].precipProbability*100) +" %");
         $("#daily-pressure5").html(Math.round(clima.daily.data[5].pressure) + " hPa");
         skycons.add("icon5", clima.daily.data[5].icon);
 
@@ -220,6 +227,7 @@ function mostrarClima(latitud,longitud){
         $("#daily-windSpeed6").html(redondear(clima.daily.data[6].windSpeed) + " km/h");
         $("#daily-windBearing6").html(orientacion(clima.daily.data[6].windBearing));
         $("#daily-humidity6").html(Math.round(clima.daily.data[6].humidity*100) +" %");
+        $("#daily-precipProbability").html(Math.round(clima.daily.data[6].precipProbability*100) +" %");
         $("#daily-pressure6").html(Math.round(clima.daily.data[6].pressure) + " hPa");
         skycons.add("icon6", clima.daily.data[6].icon);
 
@@ -233,6 +241,7 @@ function mostrarClima(latitud,longitud){
         $("#daily-windSpeed7").html(redondear(clima.daily.data[7].windSpeed) + " km/h");
         $("#daily-windBearing7").html(orientacion(clima.daily.data[7].windBearing));
         $("#daily-humidity7").html(Math.round(clima.daily.data[7].humidity*100) +" %");
+        $("#daily-precipProbability").html(Math.round(clima.daily.data[7].precipProbability*100) +" %");
         $("#daily-pressure7").html(Math.round(clima.daily.data[7].pressure) + " hPa");
         skycons.add("icon7", clima.daily.data[7].icon);
 
@@ -261,12 +270,12 @@ function mostrarClima(latitud,longitud){
             //Creo dinamicamente los elementos necesarios y sus hijos para mostrar la info
             
             else{
-                var listItem="<li data-target=\"#myCarousel\" data-slide-to="+i+"></li>";
+                var listItem="<li data-target=\"#myCarousel2\" data-slide-to="+i+"></li>";
                 $("#listaOrdenada").append(listItem);
 
                 var horario=i+":00 hs";
 
-                var prueba="<div class=\"item\"><center><div class=\"recuadro2\"><h4 id="+"hour"+i+" class=\"subtitulo2\" ></h4><div class=\"text-left\"><label>&nbsp; Resumen: &nbsp;</label><span id="+"hourly-summary"+i+"></span> <br/></div><div class=\"row\"><div class=\"col-md-3 text-center\"><div class=\"icono-clima\"><canvas id="+"icon-hour"+i+" class=\"icon\"></canvas></div></div><div class=\"col-md-4 text-left\" ><img src=\"img/tempmin.jpg\" class=\"black-icon2\" />&nbsp;<label>&nbsp; Temperatura: &nbsp;</label><span id="+"hourly-temperature"+i+"></span><br/><span class=\"sign\">+-</span><label>&nbsp; ST: &nbsp;</label><span id="+"hourly-apparentTemperature"+i+"></span><br/><span class=\"sign\">+</span><label>&nbsp; Prob. Lluvias: &nbsp;</label><span id="+"hourly-precipProbability"+i+"></span><br/></div><div class=\"col-md-5 sldr-panel-der text-left\" ><img src=\"img/humedad.jpg\" class=\"black-icon\"/>&nbsp;<label>Humedad: &nbsp;</label><span id="+"hourly-humidity"+i+"></span><br/><img src=\"img/presion2.jpg\" class=\"black-icon\"/><label>&nbsp; Presión: &nbsp;</label><span id="+"hourly-pressure"+i+"></span><br/><img src=\"img/viento.jpg\" class=\"black-icon\"/><label>&nbsp;Viento:&nbsp;</label><span id="+"hourly-windSpeed"+i+"></span>&nbsp;<span id="+"hourly-windBearing"+i+"></span><br/></div></div></div></center></div>";
+                var prueba="<div class=\"item\"><center><div class=\"recuadro2\"><h4 id="+"hour"+i+" class=\"subtitulo2\" ></h4><div class=\"text-left\"><label>&nbsp; Resumen: &nbsp;</label><span id="+"hourly-summary"+i+"></span> <br/></div><div class=\"row\"><div class=\"col-md-3 text-center\"><div class=\"icono-clima\"><canvas id="+"icon-hour"+i+" class=\"icon\"></canvas></div></div><div class=\"col-md-4 text-left\" ><img src=\"img/tempmin.jpg\" class=\"black-icon2\" />&nbsp;<label>&nbsp; Temperatura: &nbsp;</label><span id="+"hourly-temperature"+i+"></span><br/><span class=\"sign\">+-</span><label>&nbsp; ST: &nbsp;</label><span id="+"hourly-apparentTemperature"+i+"></span><br/><img src=\"img/lluvia.jpg\" class=\"black-icon\"/><label>&nbsp; Prob. Lluvia: &nbsp;</label><span id="+"hourly-precipProbability"+i+"></span><br/></div><div class=\"col-md-5 sldr-panel-der text-left\" ><img src=\"img/humedad.jpg\" class=\"black-icon\"/>&nbsp;<label>Humedad: &nbsp;</label><span id="+"hourly-humidity"+i+"></span><br/><img src=\"img/presion2.jpg\" class=\"black-icon\"/><label>&nbsp; Presión: &nbsp;</label><span id="+"hourly-pressure"+i+"></span><br/><img src=\"img/viento.jpg\" class=\"black-icon\"/><label>&nbsp;Viento:&nbsp;</label><span id="+"hourly-windSpeed"+i+"></span>&nbsp;<span id="+"hourly-windBearing"+i+"></span><br/></div></div></div></center></div>";
                 $("#info-hour").append(prueba);
 
                 $("#hour"+i).html(horario);
@@ -283,7 +292,7 @@ function mostrarClima(latitud,longitud){
                
         }    
 
-        var controles="<a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\"><span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span><span class=\"sr-only\">Previous</span></a><a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\"><span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span><span class=\"sr-only\">Next</span></a>";
+        var controles="<a class=\"left carousel-control\" href=\"#myCarousel2\" role=\"button\" data-slide=\"prev\"><span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span><span class=\"sr-only\">Previous</span></a><a class=\"right carousel-control\" href=\"#myCarousel2\" role=\"button\" data-slide=\"next\"><span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span><span class=\"sr-only\">Next</span></a>";
 
         $("#info-hour").append(controles);
 
