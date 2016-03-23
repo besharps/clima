@@ -1,223 +1,119 @@
 body{
-  background: linear-gradient(0deg,#4c4c4c,#bab5b5);
-  /*background-image: url('../img/gotas05.gif');*/
+
 }
 
-.controls {
-  margin-top: 10px;
-  border: 1px solid transparent;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  height: 32px;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
 
 #address {
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  width: 300px;
+	/*background-color: white;*/
+	color: #222222;
+	font-family: Roboto;
+	font-size: 15px;
+	/*font-weight: 300;*/
+	/*margin-left: 12px;*/
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	/*width: 300px;*/
 }
 
-#address:focus {
-  border-color: #B404AE;
-}
-
-.address-container {
-  font-family: Roboto;
-}
-
-#type-selector {
-  padding: 0px 11px 0px 11px;
-  margin-left: 0px;
-}
-
-#type-selector label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
-}
-
-#logo{
-  position:absolute;
-  z-index: 2;
-  margin-top: 55%;
-  margin-left: 3%;
-}
-
-#recuadro{
-  background: #FFFFFF;
-  position:absolute;
-  margin-top: 30%;
-  z-index: 3;
-  padding-left: 1%;
-  padding-right: 1%; 
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
-}
-
-#botones{
-  margin-top: 115%;
-  position: absolute;
-  z-index: 2;
-  margin-left: 0px;
-  float: left;
-  width: 260px;
-}
-
-#foto-ciudad{
-  position: absolute;
-  z-index: 1; 
-  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
-  height: 25000% !important;
-  background: url("../img/city2.jpg") no-repeat center center fixed;
-  -webkit-background-size : cover ; 
-  -moz-background-size : cover ; 
-  -o-background-size : cover ; 
-  background-size : cover ; 
-}
 
 #map_canvas{
-  margin-top:1%;
-  margin-bottom: 2%;
-  height:200px;
+	margin-bottom: 15px;
+	height: 200px;
 }
 
-#izquierda{
-  padding-left: 0px;
-  height: 750px;
-}
-
-#btn_pr_extend,#btn_pr_extend_hour{
-  background: none;
-}
 
 #currently-temperature{
-  font-size: 50px !important;
-  font-weight: bold;
-  font-family: fantasy,helvetic, arial, romana;
+	font-size: 60px !important;
+	font-weight: 300;
+	font-family: Roboto;
 }
 
 #ubicacion{
-  font-size: 20px;
+	font-size: 20px;
 }
 
 
-#info_extend,#info_extend_hour{
+#info_extend{
+	display: none;
+}
+
+.icon{
+	width: 100px;
+	height: 100px;
+	text-align: center;
+}
+
+
+#contenedor{
+	position:relative;
+}
+
+
+.lef{
+	float: left;
+}
+
+.clear{
+	float: clear;
+}
+
+#centro{
+	padding: 0px;
+}
+
+.black-icon{
+	width: 15px;
+}
+
+.black-icon2{
+	width: 10px;
+}
+
+.black-icon3{
+	width: 20px;
+}
+
+#currently-location{
+	font-size: 18px;
+	font-weight: 400;
+}
+
+#principal-info{
+	padding-left: 0px;
+}
+
+#secundary-info{
+	padding-left: 0px;
+}
+
+#pr_ext{
+	font-size: 17px;
+}
+
+.subtitulo2{
+	font-weight: bold;
+}
+
+/*Controla el color de los indicadores del slider (círculos de la parte inferior)*/
+.carousel-indicators li{
+  border: 1px solid black;
   display: none;
-  margin-bottom: 0px;
+}
+
+.carousel-indicators .active{
+  background: black;
+  display: none;
+}
+
+.sub-li{
+	padding-left: 10%;	
 }
 
 #icono, .icono-clima{
   background-color: #B404AE !important;
-  margin-left: 6%;
 }
 
-.icon{
-  width: 100px;
-  height: 100px;
-  text-align: center;
-}
-
-#contenedor{
-  position:relative;
-}
-
-.lef{
-  float: left;
-}
-
-.clear{
-  float: clear;
-}
-
-#centro{
-  padding: 0px;
-}
-
-.black-icon{
-  width: 25px;
-  margin: 0px;
-}
-
-.black-icon2{
-  width: 15px;
-  margin: 0px;
-}
-
-.black-icon3{
-  width: 30px;
-  margin: 0px;
-}
-
-.sign{
-  font-size: 20px;
-  font-weight: bold;
-}
-
-#principal-info{
-  padding-left: 0px;
-}
-
-#secundary-info{
-  padding-left: 0px;
-}
-
-#pr_ext{
-  font-size: 17px;
-}
-
-#btn_filtrar{
-  color:#B404AE !important;
-}
-
-#pie{
-  color: #FFFFFF;
-  margin-bottom: 0px;
-}
-
-.selected{
-  border:1px solid #B404AE !important;
-}
-
-.recuadro2{
-  background: white;
-  width: 700px;
-  height: 210px;
-  padding-right: 3%;
-  margin-bottom: 7%;
-  margin-top: 7%;
-}
-
-.subtitulo2{
-  text-align: center;
-  font-weight: bold;
-  color:#B404AE; 
-}
-
-.sldr-panel-der{
-  padding-right: 0px;
-  margin-left: 0px;
-}
-
-.carousel-indicators li{
-  border: 1px solid #B404AE;
-}
-
-.carousel-indicators .active{
-  background: #B404AE;
-}
-
-
+/*
 #logo-besharps{
   width: 100px;
-}
-
-/* No funciona porque el html al que hace referencia no está en mi dominio */
-/*div.login-control{
-  display:none !important;
 }*/

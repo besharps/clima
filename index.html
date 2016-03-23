@@ -1,640 +1,732 @@
+
 <!DOCTYPE html>
 
 <html>
 
 <head>
+	<title>B# Weather 1.0</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<meta charset="UTF-8" />
-<title>B# clima</title>
+	<!-- Mobile support -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>  
+	<!-- Material Design fonts -->
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
-<!-- API que muestra la ubicación en un mapa y The Google Places Autocomplete API  -->  
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs9IPWFNn4LAOx8oRZ-SixSs84F8Hnk7Q&signed_in=true&libraries=places&language=es" async defer></script>  
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	
+	<!-- Bootstrap Material Design -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.8/css/bootstrap-material-design.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.8/css/ripples.min.css">
 
-<!-- Biblioteca de funciones-->
-<script src="js/biblioteca.js"></script>    
-<script src="js/eventos.js"></script>    
+	<!-- Dropdown.js -->
+	<link href="https://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css" rel="stylesheet">
 
-<!-- Material Design fonts -->
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+	<!-- Page style -->
+	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="css/estilo.css">
 
-<!-- Bootstrap -->
-<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script src="js/bootstrap.min.js"></script> 
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 
-<!-- Bootstrap Material Design -->
-<link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.css">
-<link rel="stylesheet" type="text/css" href="css/ripples.min.css">
-<script src="js/ripples.min.js"></script>
-<script src="js/material.min.js"></script>
-<script src="js/snackbar.min.js"></script>
-<script src="js/jquery.nouislider.min.js"></script>    
+	<!-- Twitter Bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<!-- Dropdowns de bootstrap M design -->
-<link rel="stylesheet" type="text/css" href="css/jquery.dropdown.css">
-<!-- <script src="js/jquery.dropdown.js"></script> -->
+	<!-- Material Design for Bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.8/js/material.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.8/js/ripples.min.js"></script>
 
-<!-- Hoja de estilos -->
-<link rel="stylesheet" href="css/estilo.css" />
+	<!-- API que muestra la ubicación en un mapa y The Google Places Autocomplete API  -->  
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs9IPWFNn4LAOx8oRZ-SixSs84F8Hnk7Q&signed_in=true&libraries=places&language=es" async defer></script>
 
-<!-- iconos del clima, Skycons de forecast -->
-<script src="js/skycons.js"></script>
+	<!-- Biblioteca de funciones -->
+	<script src="js/eventos.js"></script>
+	<script src="js/biblioteca.js"></script>
+	
 
-
-<!-- bxSlider Javascript file -->
-<script src="js/jquery.bxslider/jquery.bxslider.min.js"></script>
-<!-- bxSlider CSS file -->
-<link href="js/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+	<!-- iconos del clima, Skycons de forecast -->
+	<script src="js/skycons.js"></script>
 
 </head>
-
-
-
 <body>
 
-  <div>
-	<!-- <input type="text" maxlength="100" id="address"  class="controls" /> -->
- 
-    <input placeholder="Ingrese una ubicación" maxlength="100" class="form-control controls" id="address" type="text" />
-
-
-    <div class="dropdown" id="type-selector">
-      <button id="btn_filtrar" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filtrar
-      <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><input type="radio" name="type" id="changetype-all" checked="checked"/>Todo</li>
-        <li><input type="radio" name="type" id="changetype-establishment">Establecimientos</li>
-        <li><input type="radio" name="type" id="changetype-address">Direcciones</li>
-        <li><input type="radio" name="type" id="changetype-geocode">Geo-códigos</li>
-      </ul>
-    </div>
-  </div>
-
-
-  <div id="contenedor">
-
-  <div class="col-md-12">
-    <div class="row">
-      <div id="foto-ciudad" class="col-md-12"> 
-      </div>
-    </div>
-  </div>
-
-  <!-- columna izquierda -->
-  <div class="col-md-3 left" id="izquierda">
-
-    <img id="logo" src="img/logo-clima.png" alt="logo" />
-
-    <div id="botones" class="btn-group-vertical">
-      <span id="pr_ext" ><b>PRONÓSTICO EXTENDIDO</b></span>
-      <a  id="btn_pr_extend" href="javascript:void(0)" class="btn btn-raised">Por día</a>
-      <a  id="btn_pr_extend_hour" href="javascript:void(0)" class="btn btn-raised">Por hora</a>
-    </div>
-  </div>
-
-  <!-- columna central -->
-  <div id="centro" class="col-md-7 left">
-
-    <div id="recuadro">
-      <div id='map_canvas' ></div>
-
-      <div id="actual" class="row">
-        <div id="info_currently">
-          <div class="col-md-3 text-center">
-            <div id="icono">
-              <canvas id="currently-icon" width="100" height="100"></canvas>  
-            </div>
-          </div>
-          
-          <div id="principal-info" class="col-md-5">
-            <p id="currently-location"></p>
-            <p id="currently-temperature"></p>
-            <p id="currently-summary"></p>        
-            <label for="">ST: &nbsp; </label><span id="currently-apparentTemperature"></span>
-          </div>
-
-          <div class="col-md-4" id="secundary-info">
-            <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
-            <br/>
-            <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
-            <br/>
-            <img src="img/viento.jpg" class="black-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span><br/>
-            <br/>
-            <img src="img/lluvia.jpg" class="black-icon3" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="currently-precipProbability"></span>
-          </div>  
-        </div><!-- info currently -->
-      </div> <!-- actual -->
-      <br/>
-    </div> <!-- recuadro -->
-  </div> <!-- centro -->
-
-  <!-- tercer columna  -->
-  <div class="col-md-2 left" id="derecha"></div>
-
-  <br/>
-  <br/>
-  <br/>
-
-  <div id="info_extend">
-    <center>
-      <div id="titulo2">
-        <div class="row">
-          <div class="col-md-12">
-            <h2><b> Pronóstico Semanal</b> </h2>
-          </div>
-        </div>
-
-        <br/>
-        <h3>Resumen general</h3><b><p id="daily-general-summary"></p></b>
-
-      </div>
-    </center>
-
-    <br/>
-
-    <!-- SLIDER -->
-
-    <br/>
-    <br/>
-
-    <div class="container">
-      <br>
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-          <li data-target="#myCarousel" data-slide-to="3"></li>
-          <li data-target="#myCarousel" data-slide-to="4"></li>
-          <li data-target="#myCarousel" data-slide-to="5"></li>
-          <li data-target="#myCarousel" data-slide-to="6"></li>
-          <li data-target="#myCarousel" data-slide-to="7"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <center>
-              <div class="recuadro2">
-                <h4 class="subtitulo2" >HOY</h4>
-                <div class="text-left">
-                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary"></span> <br/>
-                </div>
-
-                <div class="row">  
-                <div class="col-md-3 text-center">
-                  <div class="icono-clima">
-                    <canvas id="icon" class="icon"></canvas>  
-                  </div>
-                </div>
-
-                <div class="col-md-4 text-left" >
-                  <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
-                  <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin"></span> <br/>
-                  
-                  <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
-                  <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax"></span> <br/>
-                  
-                  <span class="sign">-</span>
-                  <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin"></span> <br/>
-                  
-                  <span class="sign">+</span>
-                  <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax"></span> <br/>
-                </div> 
-
-                <div class="col-md-5 sldr-panel-der text-left" >
-                  <img src="img/humedad.jpg" class="black-icon" />&nbsp;<label for="">Humedad: &nbsp;</label><span id="daily-humidity"></span>
-                  <br/>
-                  <img src="img/presion2.jpg" class="black-icon" /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure"></span>
-                  <br/>
-                  <img src="img/viento.jpg" class="black-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed"></span>&nbsp;<span id="daily-windBearing"></span>
-                  <br/>
-                  <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability"></span>
-                </div>  
-                </div>
-              </div>
-            </center>
-          </div>
-
-          <div class="item">
-            <center>
-              <div class="recuadro2">
-                <h4 id="day1" class="subtitulo2"></h4>
-                <div class="text-left">
-                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary1"></span> <br/>
-                </div>
-
-                <div class="row">  
-                  <div class="col-md-3 text-center">
-                    <div class="icono-clima">
-                      <canvas id="icon1" class="icon"></canvas>  
-                    </div>
-                  </div>
-
-                  <div class="col-md-5 text-left" >
-                    <img src="img/tempmin.jpg" class="black-icon2 text-left" />&nbsp;
-                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin1"></span> <br/>
-                    
-                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax1"></span> <br/>
-                    
-                    <span class="sign">-</span>
-                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin1"></span> <br/>
-                    
-                    <span class="sign">+</span>
-                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax1"></span> <br/>
-                  </div> 
-
-                  <div class="col-md-4 sldr-panel-der text-left" >
-                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity1"></span> 
-                    <br/>
-                    <img src="img/presion2.jpg" class="black-icon" /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure1"></span> 
-                    <br/>
-                    <img src="img/viento.jpg" class="black-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed1"></span>&nbsp;<span id="daily-windBearing1"></span>
-                    <br/>
-                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability1"></span>
-                  </div>  
-                </div>
-              </div>
-            </center>
-          </div>
-      
-          <div class="item">
-            <center>
-              <div class="recuadro2">
-                <h4 id="day2" class="subtitulo2"></h4>
-                <div class="text-left">
-                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary2"></span> <br/>
-                </div>
-
-                <div class="row">  
-                  <div class="col-md-3 text-center">
-                    <div class="icono-clima">
-                      <canvas id="icon2" class="icon"></canvas>  
-                    </div>
-                  </div>
-
-                  <div class="col-md-5 text-left" >
-                    <img src="img/tempmin.jpg" class="black-icon2 text-left" />&nbsp;
-                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin2"></span> <br/>
-                    
-                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax2"></span> <br/>
-                    
-                    <span class="sign">-</span>
-                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin2"></span> <br/>
-                    
-                    <span class="sign">+</span>
-                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax2"></span> <br/>
-                  </div> 
-
-                  <div class="col-md-4 sldr-panel-der text-left" >
-                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity2"></span> 
-                    <br/>
-                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure2"></span>
-                    <br/>
-                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed2"></span>&nbsp;<span id="daily-windBearing2"></span>
-                    <br/>
-                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability2"></span>
-                  </div>  
-                </div>
-              </div>
-            </center>
-          </div>
-
-          <div class="item">
-            <center>
-              <div class="recuadro2">
-                <h4 id="day3" class="subtitulo2"></h4>
-                <div class="text-left">
-                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary3"></span> <br/>
-                </div>
-
-                <div class="row">  
-                  <div class="col-md-3 text-center">
-                    <div class="icono-clima">
-                      <canvas id="icon3" class="icon"></canvas>  
-                    </div>
-                  </div>
-
-                  <div class="col-md-5 text-left" >
-                    <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin3"></span> <br/>
-                    
-                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax3"></span> <br/>
-                    
-                    <span class="sign">-</span>
-                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin3"></span> <br/>
-                    
-                    <span class="sign">+</span>
-                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax3"></span> <br/>
-                  </div> 
-
-                  <div class="col-md-4 sldr-panel-der text-left" >
-                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity3"></span> 
-                    <br/>
-                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure3"></span>
-                    <br/>
-                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed3"></span>&nbsp;<span id="daily-windBearing3"></span>
-                    <br/>
-                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability3"></span>
-                  </div>  
-                </div>
-              </div>
-            </center>
-          </div>
-
-          <div class="item">
-            <center>
-              <div class="recuadro2">
-                <h4 id="day4" class="subtitulo2"></h4>
-                <div class="text-left">
-                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary4"></span> <br/>
-                </div>
-
-                <div class="row">  
-                  <div class="col-md-3 text-center">
-                    <div class="icono-clima">
-                      <canvas id="icon4" class="icon"></canvas>  
-                    </div>
-                  </div>
-
-                  <div class="col-md-5 text-left" >
-                    <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin4"></span> <br/>
-                    
-                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax4"></span> <br/>
-                    
-                    <span class="sign">-</span>
-                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin4"></span> <br/>
-                    
-                    <span class="sign">+</span>
-                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax4"></span> <br/>
-                  </div> 
-
-                  <div class="col-md-4 sldr-panel-der text-left" >
-                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity4"></span>
-                    <br/>
-                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure4"></span>
-                    <br/>
-                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed4"></span>&nbsp;<span id="daily-windBearing4"></span>
-                    <br/>
-                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability4"></span>
-                  </div>  
-                </div>
-              </div>
-            </center>
-          </div>
-
-          <div class="item">
-            <center>
-              <div class="recuadro2">
-                <h4 id="day5" class="subtitulo2"></h4>
-                <div class="text-left">
-                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary5"></span> <br/>
-                </div>
-
-                <div class="row">  
-                  <div class="col-md-3 text-center">
-                    <div class="icono-clima">
-                      <canvas id="icon5" class="icon"></canvas>  
-                    </div>
-                  </div>
-
-                  <div class="col-md-5 text-left" >
-                    <img src="img/tempmin.jpg" class="black-icon2 text-left" />&nbsp;
-                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin5"></span> <br/>
-                    
-                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax5"></span> <br/>
-                    
-                    <span class="sign">-</span>
-                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin5"></span> <br/>
-                    
-                    <span class="sign">+</span>
-                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax5"></span> <br/>
-                  </div> 
-
-                  <div class="col-md-4 sldr-panel-der text-left" >
-                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity5"></span> 
-                    <br/>
-                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure5"></span> 
-                    <br/>
-                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed5"></span>&nbsp;<span id="daily-windBearing5"></span>
-                    <br/>
-                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability5"></span>
-                  </div>  
-                </div>
-              </div>
-            </center>
-          </div>
-
-          <div class="item">
-            <center>
-              <div class="recuadro2">
-                <h4 id="day6" class="subtitulo2"></h4>
-                <div class="text-left">
-                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary6"></span> <br/>
-                </div>
-
-                <div class="row">  
-                  <div class="col-md-3 text-center">
-                    <div class="icono-clima">
-                      <canvas id="icon6" class="icon"></canvas>  
-                    </div>
-                  </div>
-
-                  <div class="col-md-5 text-left" >
-                    <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin6"></span> <br/>
-                    
-                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax6"></span> <br/>
-                    
-                    <span class="sign">-</span>
-                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin6"></span> <br/>
-                    
-                    <span class="sign">+</span>
-                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax6"></span> <br/>
-                  </div> 
-
-                  <div class="col-md-4 sldr-panel-der text-left" >
-                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity6"></span>
-                    <br/>
-                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure6"></span>
-                    <br/>
-                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed6"></span>&nbsp;<span id="daily-windBearing6"></span>
-                    <br/>
-                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability6"></span>
-                  </div>  
-                </div>
-              </div>
-            </center>
-          </div>
-
-          <div class="item">
-            <center>
-              <div class="recuadro2">
-                <h4 id="day7" class="subtitulo2"></h4>
-                <div class="text-left">
-                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary7"></span> <br/>
-                </div>
-
-                <div class="row">  
-                  <div class="col-md-3 text-center">
-                    <div class="icono-clima">
-                      <canvas id="icon7" class="icon"></canvas>  
-                    </div>
-                  </div>
-
-                  <div class="col-md-5 text-left" >
-                    <img src="img/tempmin.jpg" class="black-icon2 text-left" />&nbsp;
-                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin7"></span> <br/>
-                    
-                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
-                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax7"></span> <br/>
-                    
-                    <span class="sign">-</span>
-                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin7"></span> <br/>
-                    
-                    <span class="sign">+</span>
-                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax7"></span> <br/>
-                  </div> 
-
-                  <div class="col-md-4 sldr-panel-der text-left" >
-                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity7"></span>
-                    <br/>
-                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure7"></span>
-                    <br/>
-                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed7"></span>&nbsp;<span id="daily-windBearing7"></span>
-                    <br/>
-                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability7"></span>
-                  </div>  
-                </div>
-              </div>
-            </center>
-          </div>
-        </div>
-
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div> <!-- id MyCarousel -->
-
-      <!-- Pronóstico extendido por hora -->
-      <div id="info_extend_hour">
-        <center>
-          <div id="titulo2">
-            <div class="row">
-              <div class="col-md-12">
-                <h2><b> Pronóstico Hora por Hora</b> </h2>
-              </div>
-            </div>
-
-            <br/>
-            <h3>Resumen general</h3><b><p id="hourly-general-summary"></p></b>
-          </div>
-        </center>
-
-        <br/>
-
-        <!-- SLIDER -->
-        <br/>
-        <br/>
-
-        <div class="container">
-          <br>
-          <div id="myCarousel2" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol id="listaOrdenada" class="carousel-indicators">
-              <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div id="info-hour" class="carousel-inner" role="listbox">
-              <div class="item active">
-                <center>
-                  <div class="recuadro2">
-                    <h4 class="subtitulo2" >0:00 hs</h4>
-                    <div class="text-left">
-                      <label for="">&nbsp; Resumen: &nbsp;</label><span id="hourly-summary0"></span> <br/>
-                    </div>
-
-                    <div class="row">  
-                      <div class="col-md-3 text-center">
-                        <div class="icono-clima">
-                          <canvas id="icon-hour0" class="icon"></canvas>  
-                        </div>
-                      </div>
-
-                      <div class="col-md-4 text-left" >
-                        <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
-                        <label for="">&nbsp; Temperatura: &nbsp;</label><span id="hourly-temperature0"></span> <br/>
-                        
-                        <span class="sign">+-</span>
-                        <label for="">&nbsp; ST: &nbsp;</label><span id="hourly-apparentTemperature0"></span> <br/>
-                        
-                        <img src="img/lluvia.jpg" class="black-icon" />&nbsp;
-                        <label for="">&nbsp; Prob. Lluvia: &nbsp; </label><span id="hourly-precipProbability0"></span> <br/>
-                      </div> 
-
-                      <div class="col-md-5 sldr-panel-der text-left" >
-                        <img src="img/humedad.jpg" class="black-icon" />&nbsp;<label for="">Humedad: &nbsp;</label><span id="hourly-humidity0"></span>
-                        <br/>
-                        <img src="img/presion2.jpg" class="black-icon" /><label for="">&nbsp; Presión: &nbsp; </label><span id="hourly-pressure0"></span>
-                        <br/>
-                        <img src="img/viento.jpg" class="black-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="hourly-windSpeed0"></span>&nbsp;<span id="hourly-windBearing0"></span>
-                        <br/>
-                      </div>  
-                    </div> <!-- class row -->
-                  </div> <!-- class recuadro2 -->
-                </center>
-              </div> <!-- class item active -->
-            </div> <!-- id info-hour role listbox -->
-          </div> <!-- id myCarousel 2-->
-        </div>  <!-- class container -->
-      </div><!-- id info extend hour--> 
-    </div> <!-- class container -->
-    
-  </div><!-- id info extend... Agregado!!!!!-->
-  </div> <!-- contenedor principal Agregado!!!!!-->    
-
-
-  <br>
-  <br>
-  <br>
-  <br>
-
-  <div class="row">
-    <div  id="pie" class="col-md-12">
-      <center><b>  Desarrollado por &nbsp;</b> <img alt="logo-besharps" id="logo-besharps" src="img/besharps.jpg" /> </center>
-    </div> 
-  </div>
-  
-</body>
-
-<script type="text/javascript">
-
-$(document).ready(function(){
-
-var address = $('#address').val("");
-
-
-});
+<div class="header-panel shadow-z-2">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-3">
+				<h1>B# Weather</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid main">
+	<div class="row">
+		<nav class="col-xs-3 menu">
+			<ul>
+				<li class="active withripple" data-target="#actual"><b>Estado Actual</b></li>
+				<li ><b>Pronóstico Extendido</b></li>
+				<li class="withripple" data-target="#extendido"><span class="sub-li" >Por Día</span></li>
+				<li class="withripple" data-target="#ext-hora"><span class="sub-li" >Por Hora</span></li>
+			</ul>
+		</nav>
+		<div class="pages col-xs-9">
+			<div class="row">
+				<div class="col-xs-10">
+					<div class="well page active" id="actual">
+						
+						<div id="map_canvas"></div>
+
+						<div class="form-group label-floating hidden" id="addressInput">				
+							<label class="control-label" for="address">Ingrese su ubicación actual...</label>
+							<input class="form-control" id="address" type="text" placeholder="" maxlength="100">
+							<p class="help-block">Puede ingresar su dirección, ciudad o provincia.</p>
+
+
+							<div class="dropdown" id="type-selector">
+							  <button id="btn_filtrar" class="btn btn-primary dropdown-toggle hidden" type="button" data-toggle="dropdown">Filtrar
+							  <span class="caret"></span></button>
+							  <ul class="dropdown-menu">
+								<li><input type="radio" name="type" id="changetype-all" checked/>Todo</li>
+								<li><input type="radio" name="type" id="changetype-establishment">Establecimientos</li>
+								<li><input type="radio" name="type" id="changetype-address">Direcciones</li>
+								<li><input type="radio" name="type" id="changetype-geocode">Geo-códigos</li>
+							  </ul>
+							</div>
+
+						</div>
+						
+						<p id="currently-location"></p>
+						
+						
+						<div class="row">
+
+							<div id="info_currently">
+								<div class="col-md-3 text-center">
+									<div id="icono">
+										<canvas id="currently-icon" width="100" height="100"></canvas>
+									</div> 
+								</div>
+						  	</div>
+							  
+							<div id="principal-info" class="col-md-5">
+								<p id="currently-location"></p>
+								<p id="currently-temperature"></p>
+								<p id="currently-summary"></p>        
+								<label for="">ST: &nbsp; </label><span id="currently-apparentTemperature"></span>
+							</div>
+
+							<div class="col-md-4" id="secundary-info">
+								<img src="img/humedad.jpg" class="black-icon3" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="currently-humidity"></span> <br/>
+								<br/>
+								<img src="img/presion2.jpg" class="black-icon3"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="currently-pressure"></span> <br/>
+								<br/>
+								<img src="img/lluvia.jpg" class="black-icon3" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="currently-precipProbability"></span> <br/>
+								<br/>
+								<img src="img/viento.jpg" class="black-icon3" /><label for="">&nbsp; Viento: &nbsp; </label><span id="currently-windSpeed"></span>&nbsp;<span id="currently-windBearing"></span>
+							</div>  
+						</div>
+					</div>
+
+					<div class="well page" id="extendido">
+						<center><h1 class="header">Pronóstico Extendido Semanal</h1></center>
+       					<h3>Resumen general</h3>
+       					<p id="daily-general-summary"></p>
+
+       					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	        				<!-- Indicators -->
+	        				<ol class="carousel-indicators">
+					          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					          <li data-target="#myCarousel" data-slide-to="1"></li>
+					          <li data-target="#myCarousel" data-slide-to="2"></li>
+					          <li data-target="#myCarousel" data-slide-to="3"></li>
+					          <li data-target="#myCarousel" data-slide-to="4"></li>
+					          <li data-target="#myCarousel" data-slide-to="5"></li>
+					          <li data-target="#myCarousel" data-slide-to="6"></li>
+					          <li data-target="#myCarousel" data-slide-to="7"></li>
+	        				</ol>
+
+	        				<!-- Wrapper for slides -->
+	        				<div class="carousel-inner" role="listbox">
+					          <div class="item active">
+					            <center>
+					              <div class="recuadro2">
+					                <h4 class="subtitulo2" ><b>Hoy</b></h4>
+					                <div class="text-left">
+					                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary"></span> <br/>
+					                </div>
+
+					                <div class="row">  
+					                <div class="col-md-3 text-center">
+					                  <div class="icono-clima">
+					                    <canvas id="icon" class="icon"></canvas>  
+					                  </div>
+					                </div>
+
+					                <div class="col-md-4 text-left" >
+					                  <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
+					                  <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin"></span> <br/>
+					                  
+					                  <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
+					                  <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax"></span> <br/>
+					                  
+					                  <span class="sign">-</span>
+					                  <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin"></span> <br/>
+					                  
+					                  <span class="sign">+</span>
+					                  <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax"></span> <br/>
+					                </div> 
+
+					                <div class="col-md-5 sldr-panel-der text-left" >
+					                  <img src="img/humedad.jpg" class="black-icon" />&nbsp;<label for="">Humedad: &nbsp;</label><span id="daily-humidity"></span>
+					                  <br/>
+					                  <img src="img/presion2.jpg" class="black-icon" /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure"></span>
+					                  <br/>
+					                  <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability"></span>
+					                  <br/>
+					                  <img src="img/viento.jpg" class="black-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed"></span>&nbsp;<span id="daily-windBearing"></span>					                  
+					                </div>  
+					                </div>
+					              </div>
+					              <br/>
+					              <br/>
+					            </center>
+					          </div>
+
+					          <div class="item">
+					            <center>
+					              <div class="recuadro2">
+					                <h4 id="day1" class="subtitulo2"><b></b></h4>
+					                <div class="text-left">
+					                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary1"></span> <br/>
+					                </div>
+
+					                <div class="row">  
+					                  <div class="col-md-3 text-center">
+					                    <div class="icono-clima">
+					                      <canvas id="icon1" class="icon"></canvas>  
+					                    </div>
+					                  </div>
+
+					                  <div class="col-md-4 text-left" >
+					                    <img src="img/tempmin.jpg" class="black-icon2 text-left" />&nbsp;
+					                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin1"></span> <br/>
+					                    
+					                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax1"></span> <br/>
+					                    
+					                    <span class="sign">-</span>
+					                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin1"></span> <br/>
+					                    
+					                    <span class="sign">+</span>
+					                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax1"></span> <br/>
+					                  </div> 
+
+					                  <div class="col-md-5 sldr-panel-der text-left" >
+					                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity1"></span> 
+					                    <br/>
+					                    <img src="img/presion2.jpg" class="black-icon" /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure1"></span> 
+					                    <br/>
+					                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability1"></span>
+					                    <br/>
+					                    <img src="img/viento.jpg" class="black-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed1"></span>&nbsp;<span id="daily-windBearing1"></span>				                
+					                  </div>  
+					                </div>
+					              </div>
+					              <br/>
+					              <br/>
+					            </center>
+					          </div>
+	      
+					          <div class="item">
+					            <center>
+					              <div class="recuadro2">
+					                <h4 id="day2" class="subtitulo2"><b></b></h4>
+					                <div class="text-left">
+					                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary2"></span> <br/>
+					                </div>
+
+					                <div class="row">  
+					                  <div class="col-md-3 text-center">
+					                    <div class="icono-clima">
+					                      <canvas id="icon2" class="icon"></canvas>  
+					                    </div>
+					                  </div>
+
+					                  <div class="col-md-4 text-left" >
+					                    <img src="img/tempmin.jpg" class="black-icon2 text-left" />&nbsp;
+					                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin2"></span> <br/>
+					                    
+					                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax2"></span> <br/>
+					                    
+					                    <span class="sign">-</span>
+					                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin2"></span> <br/>
+					                    
+					                    <span class="sign">+</span>
+					                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax2"></span> <br/>
+					                  </div> 
+
+					                  <div class="col-md-5 sldr-panel-der text-left" >
+					                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity2"></span> 
+					                    <br/>
+					                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure2"></span>
+					                    <br/>
+					                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability2"></span>
+					                    <br/>
+					                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed2"></span>&nbsp;<span id="daily-windBearing2"></span>                    					                    
+					                  </div>  
+					                </div>
+					              </div>
+					              <br/>
+					              <br/>
+					            </center>
+					          </div>
+
+					          <div class="item">
+					            <center>
+					              <div class="recuadro2">
+					                <h4 id="day3" class="subtitulo2"><b></b></h4>
+					                <div class="text-left">
+					                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary3"></span> <br/>
+					                </div>
+
+					                <div class="row">  
+					                  <div class="col-md-3 text-center">
+					                    <div class="icono-clima">
+					                      <canvas id="icon3" class="icon"></canvas>  
+					                    </div>
+					                  </div>
+
+					                  <div class="col-md-4 text-left" >
+					                    <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin3"></span> <br/>
+					                    
+					                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax3"></span> <br/>
+					                    
+					                    <span class="sign">-</span>
+					                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin3"></span> <br/>
+					                    
+					                    <span class="sign">+</span>
+					                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax3"></span> <br/>
+					                  </div> 
+
+					                  <div class="col-md-5 sldr-panel-der text-left" >
+					                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity3"></span> 
+					                    <br/>
+					                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure3"></span>
+					                    <br/>
+					                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability3"></span>
+					                    <br/>
+					                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed3"></span>&nbsp;<span id="daily-windBearing3"></span>	                    				                    
+					                  </div>  
+					                </div>
+					              </div>
+					              <br/>
+					              <br/>
+					            </center>
+					          </div>
+
+					          <div class="item">
+					            <center>
+					              <div class="recuadro2">
+					                <h4 id="day4" class="subtitulo2"><b></b></h4>
+					                <div class="text-left">
+					                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary4"></span> <br/>
+					                </div>
+
+					                <div class="row">  
+					                  <div class="col-md-3 text-center">
+					                    <div class="icono-clima">
+					                      <canvas id="icon4" class="icon"></canvas>  
+					                    </div>
+					                  </div>
+
+					                  <div class="col-md-4 text-left" >
+					                    <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin4"></span> <br/>
+					                    
+					                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax4"></span> <br/>
+					                    
+					                    <span class="sign">-</span>
+					                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin4"></span> <br/>
+					                    
+					                    <span class="sign">+</span>
+					                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax4"></span> <br/>
+					                  </div> 
+
+					                  <div class="col-md-5 sldr-panel-der text-left" >
+					                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity4"></span>
+					                    <br/>
+					                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure4"></span>
+					                    <br/>
+					                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability4"></span>
+					                    <br/>
+					                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed4"></span>&nbsp;<span id="daily-windBearing4"></span>				               			                    
+					                  </div>  
+					                </div>
+					              </div>
+					              <br/>
+					              <br/>
+					            </center>
+					          </div>
+
+					          <div class="item">
+					            <center>
+					              <div class="recuadro2">
+					                <h4 id="day5" class="subtitulo2"><b></b></h4>
+					                <div class="text-left">
+					                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary5"></span> <br/>
+					                </div>
+
+					                <div class="row">  
+					                  <div class="col-md-3 text-center">
+					                    <div class="icono-clima">
+					                      <canvas id="icon5" class="icon"></canvas>  
+					                    </div>
+					                  </div>
+
+					                  <div class="col-md-4 text-left" >
+					                    <img src="img/tempmin.jpg" class="black-icon2 text-left" />&nbsp;
+					                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin5"></span> <br/>
+					                    
+					                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax5"></span> <br/>
+					                    
+					                    <span class="sign">-</span>
+					                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin5"></span> <br/>
+					                    
+					                    <span class="sign">+</span>
+					                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax5"></span> <br/>
+					                  </div> 
+
+					                  <div class="col-md-5 sldr-panel-der text-left" >
+					                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity5"></span> 
+					                    <br/>
+					                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure5"></span> 
+					                    <br/>
+					                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability5"></span>
+					                    <br/>
+					                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed5"></span>&nbsp;<span id="daily-windBearing5"></span>					                    
+					                  </div>  
+					                </div>
+					              </div>
+					              <br/>
+					              <br/>
+					            </center>
+					          </div>
+
+					          <div class="item">
+					            <center>
+					              <div class="recuadro2">
+					                <h4 id="day6" class="subtitulo2"><b></b></h4>
+					                <div class="text-left">
+					                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary6"></span> <br/>
+					                </div>
+
+					                <div class="row">  
+					                  <div class="col-md-3 text-center">
+					                    <div class="icono-clima">
+					                      <canvas id="icon6" class="icon"></canvas>  
+					                    </div>
+					                  </div>
+
+					                  <div class="col-md-4 text-left" >
+					                    <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin6"></span> <br/>
+					                    
+					                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax6"></span> <br/>
+					                    
+					                    <span class="sign">-</span>
+					                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin6"></span> <br/>
+					                    
+					                    <span class="sign">+</span>
+					                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax6"></span> <br/>
+					                  </div> 
+
+					                  <div class="col-md-5 sldr-panel-der text-left" >
+					                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity6"></span>
+					                    <br/>
+					                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure6"></span>
+					                    <br/>
+					                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability6"></span>
+					                    <br/>
+					                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed6"></span>&nbsp;<span id="daily-windBearing6"></span>					                    
+					                  </div>  
+					                </div>
+					              </div>
+					              <br/>
+					              <br/>
+					            </center>
+					          </div>
+
+					          <div class="item">
+					            <center>
+					              <div class="recuadro2">
+					                <h4 id="day7" class="subtitulo2"><b></b></h4>
+					                <div class="text-left">
+					                  <label for="">&nbsp; Resumen: &nbsp;</label><span id="daily-summary7"></span> <br/>
+					                </div>
+
+					                <div class="row">  
+					                  <div class="col-md-3 text-center">
+					                    <div class="icono-clima">
+					                      <canvas id="icon7" class="icon"></canvas>  
+					                    </div>
+					                  </div>
+
+					                  <div class="col-md-4 text-left" >
+					                    <img src="img/tempmin.jpg" class="black-icon2 text-left" />&nbsp;
+					                    <label for="">&nbsp; Temp. Mín: &nbsp;</label><span id="daily-temperatureMin7"></span> <br/>
+					                    
+					                    <img src="img/tempmax.jpg" class="black-icon2" />&nbsp;
+					                    <label for="">&nbsp; Temp. Máx: &nbsp; </label><span id="daily-temperatureMax7"></span> <br/>
+					                    
+					                    <span class="sign">-</span>
+					                    <label for="">&nbsp; ST. Mín: &nbsp;</label><span id="daily-apparentTemperatureMin7"></span> <br/>
+					                    
+					                    <span class="sign">+</span>
+					                    <label for="">&nbsp; ST. Máx: &nbsp; </label><span id="daily-apparentTemperatureMax7"></span> <br/>
+					                  </div> 
+
+					                  <div class="col-md-5 sldr-panel-der text-left" >
+					                    <img src="img/humedad.jpg" class="black-icon" /><label for="">&nbsp; Humedad: &nbsp;</label><span id="daily-humidity7"></span>
+					                    <br/>
+					                    <img src="img/presion2.jpg" class="black-icon"  /><label for="">&nbsp; Presión: &nbsp; </label><span id="daily-pressure7"></span>
+					                    <br/>
+					                    <img src="img/lluvia.jpg" class="black-icon" />&nbsp;<label for="">Prob. Lluvia: &nbsp;</label><span id="daily-precipProbability7"></span>
+					                    <br/>
+					                    <img src="img/viento.jpg" class="black-icon"  /><label for="">&nbsp; Viento: &nbsp; </label><span id="daily-windSpeed7"></span>&nbsp;<span id="daily-windBearing7"></span>					                    
+					                  </div>  
+					                </div>
+					              </div>
+					              <br/>
+					              <br/>
+					            </center>
+					          </div>
+	        				</div>
+
+					        <!-- Left and right controls -->
+					        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+					          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					          <span class="sr-only">Previous</span>
+					        </a>
+					        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+					          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					          <span class="sr-only">Next</span>
+					        </a>
+				      	</div> <!-- id MyCarousel -->
+					</div>
+
+					<!--<div class="well page" id="algo">
+						<p>PROBANDO!!!!!</p>
+					</div> -->
+	
+					<div class="well page" id="ext-hora">					
+				        <center><h1 class="header"><b> Pronóstico Hora por Hora</b> </h1></center>	
+				        <br/>
+				      <div id="info_extend_hour">					      				        				     
+				        <h3>Resumen general</h3><b><p id="hourly-general-summary"></p></b>				        
+				        <div >
+				          <br>
+				          <div id="myCarousel2" class="carousel slide" data-ride="carousel">
+				            <ol id="listaOrdenada" class="carousel-indicators">
+				              <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
+				            </ol>
+				            <div id="info-hour" class="carousel-inner" role="listbox">
+				              <div class="item active">
+				                <center>
+				                  <div class="recuadro2">
+				                    <h4 class="subtitulo2" >0:00 hs</h4>
+				                    <div class="text-left">
+				                      <label for="">&nbsp; Resumen: &nbsp;</label><span id="hourly-summary0"></span> <br/>
+				                    </div>
+
+				                    <div class="row">  
+				                      <div class="col-md-3 text-center">
+				                        <div class="icono-clima">
+				                          <canvas id="icon-hour0" class="icon"></canvas>  
+				                        </div>
+				                      </div>
+
+				                      <div class="col-md-4 text-left" >
+				                        <img src="img/tempmin.jpg" class="black-icon2" />&nbsp;
+				                        <label for="">&nbsp; Temperatura: &nbsp;</label><span id="hourly-temperature0"></span> <br/>
+				                        
+				                        <span class="sign">+-</span>
+				                        <label for="">&nbsp; ST: &nbsp;</label><span id="hourly-apparentTemperature0"></span> <br/>
+				                        
+				                        <img src="img/lluvia.jpg" class="black-icon" />&nbsp;
+				                        <label for="">&nbsp; Prob. Lluvia: &nbsp; </label><span id="hourly-precipProbability0"></span> <br/>
+				                      </div> 
+
+				                      <div class="col-md-5 sldr-panel-der text-left" >
+				                        <img src="img/humedad.jpg" class="black-icon" />&nbsp;<label for="">Humedad: &nbsp;</label><span id="hourly-humidity0"></span>
+				                        <br/>
+				                        <img src="img/presion2.jpg" class="black-icon" /><label for="">&nbsp; Presión: &nbsp; </label><span id="hourly-pressure0"></span>
+				                        <br/>
+				                        <img src="img/viento.jpg" class="black-icon" /><label for="">&nbsp; Viento: &nbsp; </label><span id="hourly-windSpeed0"></span>&nbsp;<span id="hourly-windBearing0"></span>
+				                        <br/>
+				                      </div>  
+				                    </div> 
+				                  </div> 
+				                </center>
+				              </div> 
+				            </div> 
+				          </div> 
+				       	</div>  
+				      </div> 
+					</div>	
+					
+
+				</div>
+				<!-- <div class="col-xs-2">
+					<button type="button" class="btn btn-fab btn-material-grey-200 opensource">
+						<i class="mdi-action-open-in-new"></i>
+					</button>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--
+<br/>
+<br/>
+<br/>
+
+<div class="row">
+	<div  id="pie" class="col-md-12">
+  		<center><b>  Desarrollado por &nbsp;</b> <img alt="logo-besharps" id="logo-besharps" src="img/besharps.jpg" /> </center>
+	</div> 
+</div>
+-->
+
+
+<!-- Open source code -->
+<script>
+	window.page = window.location.hash || "#about";
+
+	$(document).ready(function () {
+		if (window.page != "#about") {
+			$(".menu").find("li[data-target=" + window.page + "]").trigger("click");
+		}
+	});
+
+	$(window).on("resize", function () {
+		$("html, body").height($(window).height());
+		$(".main, .menu").height($(window).height() - $(".header-panel").outerHeight());
+		$(".pages").height($(window).height());
+	}).trigger("resize");
+
+	$(".menu li").click(function () {
+		// Menu
+		if (!$(this).data("target")) return;
+		if ($(this).is(".active")) return;
+		$(".menu li").not($(this)).removeClass("active");
+		$(".page").not(page).removeClass("active").hide();
+		window.page = $(this).data("target");
+		var page = $(window.page);
+		window.location.hash = window.page;
+		$(this).addClass("active");
+
+
+		page.show();
+
+		var totop = setInterval(function () {
+			$(".pages").animate({scrollTop: 0}, 0);
+		}, 1);
+
+		setTimeout(function () {
+			page.addClass("active");
+			setTimeout(function () {
+				clearInterval(totop);
+			}, 1000);
+		}, 100);
+	});
+
+	function cleanSource(html) {
+		var lines = html.split(/\n/);
+
+		lines.shift();
+		lines.splice(-1, 1);
+
+		var indentSize = lines[0].length - lines[0].trim().length,
+				re = new RegExp(" {" + indentSize + "}");
+
+		lines = lines.map(function (line) {
+			if (line.match(re)) {
+				line = line.substring(indentSize);
+			}
+
+			return line;
+		});
+
+		lines = lines.join("\n");
+
+		return lines;
+	}
+
+	$("#opensource").click(function () {
+		$.get(window.location.href, function (data) {
+			var html = $(data).find(window.page).html();
+			html = cleanSource(html);
+			$("#source-modal pre").text(html);
+			$("#source-modal").modal();
+		});
+	});
+</script>
+
+
+
+
+<script>
+	$.material.init();
+
+	$(document).ready(function(){
+	var address = $("#address").val("");
+	});
 
 </script>
 
 
+
+<!-- Sliders -->
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+<script>
+	$(function () {
+		$.material.init();
+		$(".shor").noUiSlider({
+			start: 40,
+			connect: "lower",
+			range: {
+				min: 0,
+				max: 100
+			}
+		});
+
+		$(".svert").noUiSlider({
+			orientation: "vertical",
+			start: 40,
+			connect: "lower",
+			range: {
+				min: 0,
+				max: 100
+			}
+		});
+	});
+</script> -->
+
+<!-- Dropdown.js -->
+<script src="https://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.js"></script>
+<script>
+	$("#dropdown-menu select").dropdown();
+</script>
+
+</body>
 </html>
