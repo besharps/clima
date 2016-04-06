@@ -1,0 +1,119 @@
+body{
+
+}
+
+
+#address {
+	/*background-color: white;*/
+	color: #222222;
+	font-family: Roboto;
+	font-size: 15px;
+	/*font-weight: 300;*/
+	/*margin-left: 12px;*/
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	/*width: 300px;*/
+}
+
+
+#map_canvas{
+	margin-bottom: 15px;
+	height: 200px;
+}
+
+
+#currently-temperature{
+	font-size: 60px !important;
+	font-weight: 300;
+	font-family: Roboto;
+}
+
+#ubicacion{
+	font-size: 20px;
+}
+
+
+#info_extend{
+	display: none;
+}
+
+.icon{
+	width: 100px;
+	height: 100px;
+	text-align: center;
+}
+
+
+#contenedor{
+	position:relative;
+}
+
+
+.lef{
+	float: left;
+}
+
+.clear{
+	float: clear;
+}
+
+#centro{
+	padding: 0px;
+}
+
+.black-icon{
+	width: 15px;
+}
+
+.black-icon2{
+	width: 10px;
+}
+
+.black-icon3{
+	width: 20px;
+}
+
+#currently-location{
+	font-size: 18px;
+	font-weight: 400;
+}
+
+#principal-info{
+	padding-left: 0px;
+}
+
+#secundary-info{
+	padding-left: 0px;
+}
+
+#pr_ext{
+	font-size: 17px;
+}
+
+.subtitulo2{
+	font-weight: bold;
+}
+
+/*Controla el color de los indicadores del slider (círculos de la parte inferior)*/
+.carousel-indicators li{
+  border: 1px solid black;
+  display: none;
+}
+
+.carousel-indicators .active{
+  background: black;
+  display: none;
+}
+
+.sub-li{
+	padding-left: 10%;	
+}
+
+#icono, .icono-clima{
+  background-color: #B404AE !important;
+}
+
+/*
+#logo-besharps{
+  width: 100px;
+}*/
