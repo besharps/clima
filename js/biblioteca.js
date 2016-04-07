@@ -109,7 +109,7 @@ function mostrarClima(latitud,longitud){
 	
 
     //Instanciando una clase para icono del clima
-    var skycons = new Skycons({"color": "white"});
+    var skycons = new Skycons({"color": "black"});
 
 
     var config = "?units=si&lang=es"; 
