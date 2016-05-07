@@ -29,10 +29,20 @@ $(document).ready(function() {
 
 				case objPositionError.PERMISSION_DENIED:
 					alert("No se ha permitido el acceso a la posición del usuario.");
+					lat = -34.6080668671682;
+					lon = -58.37044143676758;
+		
+					load_map(lat,lon);
+					mostrarClima(lat,lon);
 				break;
 
 				case objPositionError.POSITION_UNAVAILABLE:
 					alert("No se ha podido acceder a la información de su posición.");
+					lat = -34.6080668671682;
+					lon = -58.37044143676758;
+		
+					load_map(lat,lon);
+					mostrarClima(lat,lon);
 				break;
 
 				case objPositionError.TIMEOUT:
@@ -57,8 +67,8 @@ $(document).ready(function() {
 	else{
 		alert("Su navegador no soporta la API de geolocalización.");
 
-		//lat = -34.6080668671682;
-		//lon = -58.37044143676758;
+		lat = -34.6080668671682;
+		lon = -58.37044143676758;
 		
 		load_map(lat,lon);
 		mostrarClima(lat,lon);
